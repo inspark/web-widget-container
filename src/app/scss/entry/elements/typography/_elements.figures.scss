@@ -1,0 +1,24 @@
+/* ==========================================================================
+   #TYPOGRAPHY Figures
+   ========================================================================== */
+
+/*
+Figures
+
+Figure tag
+
+markup:
+<figure>
+  I`m in figure tag
+</figure>
+
+Styleguide 4.2.6
+*/
+
+// We reset this here because previously Normalize had no `figure` margins. This
+// ensures we don't break anyone's use of the element.
+figure {
+  // Normalize adds `margin` to `figure`s as browsers apply it inconsistently.
+  // We reset that to create a better flow in-page.
+  margin: 0 0 inuit-rem($inuit-global-spacing-unit);
+}

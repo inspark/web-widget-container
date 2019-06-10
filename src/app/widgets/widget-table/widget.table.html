@@ -1,0 +1,95 @@
+<div class="c-panel c-panel_lighter c-widget u-position-relative u-height-100pc">
+    <div [ngClass]="{'c-panel__image-block c-panel__image-block_grad-top' : pictureId}">
+        <img [src]="pictureId | makePictureUrl" class="c-panel__image-overlay" alt=""
+             *ngIf="pictureId">
+    </div>
+    <div class="c-panel__body">
+        <div class="c-table-toolbar">
+            <a [href]="urlExport()" class="u-float-right" [title]="'exportToCSV'">
+                <i class="fa fa-file-excel-o"></i> {{'exportToCSV'}}
+            </a>
+        </div>
+
+        <div class="c-table_responsive">
+            <table
+                    class="c-table c-table_striped c-table_condensed c-table_bordered c-table_th-min-width-huge c-table_td-min-width-huge">
+                <thead>
+                <tr *ngIf="values.item.viewConfig.visibleCol">
+                    <th *ngIf="values.item.viewConfig.visibleRow"></th>
+                    <th class="u-text_center" *ngFor="let colName of values.item.viewConfig.colsName">
+                        {{colName}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let rowName of values.item.viewConfig.rowsName; let idx = index">
+                    <td class="u-vertical-align-middle u-text_center" *ngIf="values.item.viewConfig.rowsName">
+                        {{rowName}}
+                    </td>
+                    <td class="" *ngFor="let par of values.item.values[idx]">
+                        <div class="o-grid o-grid_wrap o-grid_no-gutter">
+                            <div class="o-grid__cell o-grid__cell_width-100">
+                                <div class="o-grid o-grid_no-gutter" *ngIf="par">
+                                    <div *ngIf="values.item.viewConfig.view === 0"
+                                         class="o-grid__cell u-text_center u-centring-ver" style="width: 30px">
+                                        <div class="c-icon c-icon_svg c-icon_svg-middle u-text_center"
+                                             ng-include="par.icon.url"
+                                             ng-show="par.icon"></div>
+                                    </div>
+                                    <div *ngIf="values.item.viewConfig.view !== 0"
+                                         class="o-grid__cell o-grid__cell_width-fixed u-text_center u-centring-ver"
+                                         style="width: 30px">
+                                        <div class="c-icon c-icon_svg c-icon_svg-middle u-text_center"
+                                             ng-include="par.icon.url"
+                                             ng-show="par.icon"></div>
+                                    </div>
+                                    <div *ngIf="values.item.viewConfig.view !== 0"
+                                         class="o-grid__cell o-grid__cell_width-80 c-widget__block">
+                                        <div class="c-widgetValue c-widgetValue_small" *ngIf="!par.isEditing">
+                                            <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle">
+                                            <span class="c-text_widget-value-small"
+                                                  title="{{par.value}} {{par.device.param.measure.title}}">
+                                                  {{par.value}}
+                                            </span>
+                                            </div>
+                                            <!--<span *ngIf="!par.isFormated" class="u-text_muted u-display-inline-block u-vertical-align-top u-vertical-align-middle">{{par.data.value}} {{par.measure.unit}}</span>-->
+                                            <!--<div class="u-text_base" *ngIf="par.data.state.color == 'falsevalue'">-->
+                                            <!--Значение не достоверно-->
+                                            <!--</div>-->
+                                            <div class="u-display-inline-flex" *ngIf="par.data && par.canEditable">
+                                                <button class="c-btn c-btn_bare c-btn_border-free c-btn_tiny"
+                                                        (click)="paramEdit(par)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="c-widgetValue c-widgetValue_small" *ngIf="par.isEditing">
+                                            <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle "
+                                                 style="position: relative;">
+                                                <input class="c-input c-input_tiny c-input_block" type="text"
+                                                       onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
+                                                       required [(ngModel)]="par.value">
+                                                <div class="u-display-inline-flex">
+                                                    <button class="c-btn c-btn_bare c-btn_border-free c-btn_tiny"
+                                                            (click)="paramCancel(par)">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                    <button class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary"
+                                                            (click)="paramSave(par)">
+                                                        <i class="fa fa-check"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

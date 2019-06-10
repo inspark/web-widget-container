@@ -1,0 +1,41 @@
+/*
+Objects
+
+Object, and that it may be used in any number of unrelated contexts to the one you can currently see it in.
+Making modifications to these types of class could potentially have knock-on effects in a lot of other unrelated places.
+Tread carefully.
+* OBJECTS
+ * Wrapper..............Page constraint object.
+ * Layout...............Generic layout module.
+ * Media................Image- and text-like content side by side. The poster-child of OOCSS.
+ * Flag.................Table-layout-based advancement on the Media object.
+ * List-bare............Lists with no bullets or indents.
+ * List-inline..........A list whose items all site in a line.
+ * Box..................Simple boxing abstraction.
+ * Block................Image-on-top-of-text object.
+ * Ratio................A container for maintaining aspect ratio of content.
+ * Crop.................Provide a cropping context for media (images, etc.).
+ * Tables...............Classes for manipulating `table`s.
+ * Pack.................Pack items into available horizontal space.
+ * Panels...............A panel can be a very useful piece of layout, it provides a manageable scrollable space within
+ the existing structure of your page.
+
+Styleguide 5.0
+ */
+@import "objects.wrapper";
+@import "objects.layout";
+@import "objects.media";
+@import "objects.flag";
+@import "objects.lists";
+@import "objects.box";
+@import "objects.block";
+@import "objects.image";
+@import "objects.ratio";
+@import "objects.crop";
+@import "objects.tables";
+@import "objects.pack";
+@import "objects.containers";
+@import "objects.grid";
+@import "objects.grid.responsive";
+@import "objects.flexbox";
+@import "objects.panels";

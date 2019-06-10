@@ -1,0 +1,99 @@
+///* ========================================================================
+//   #CONFIG
+//   ======================================================================== */
+
+/*
+Config
+
+ A map of global config settings. Define any project-level configuration, feature switches, etc. in here.
+
+Styleguide 2.1
+*/
+
+$inuit-config: (
+  env: dev,
+  healthcheck: false,
+  debug: true,
+);
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-rounded: true !default;
+
+// You can access data in this map using the following function:
+//
+// inuit-config(<key>)
+//
+// Example usage:
+//
+// @if (inuit-config(debug) == true) { ...  }
+
+@function inuit-config($key) {
+  @return map-get($inuit-config, $key);
+}
+
+/*
+Inputs compilation settings
+*/
+
+/// Generates the CSS for one line form fields
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-inline-fields: true !default;
+
+/// Generates the CSS for bare text-inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_bare: true !default;
+
+/// Generates the CSS for field validation
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-validation-states: true !default;
+
+/// Generates the CSS for xxtiny inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_xxtiny: true !default;
+
+/// Generates the CSS for xtiny inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_xtiny: true !default;
+
+/// Generates the CSS for tiny inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_tiny: true !default;
+
+/// Generates the CSS for small inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_small: true !default;
+
+/// Generates the CSS for regular inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_regular: true !default;
+
+/// Generates the CSS for large inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_large: true !default;
+
+/// Generates the CSS for huge inputs
+///
+/// @group px-forms-design:variables:flag
+/// @type Boolean [default]
+$inuit-enable-input_huge: true !default;

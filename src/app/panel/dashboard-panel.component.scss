@@ -1,0 +1,44 @@
+.add-widget {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
+
+.widget-container {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.widget-block {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  height: auto;
+}
+
+.gridster-panel {
+  overflow: visible;
+  background: var(--body-background);
+  position: relative;
+}
+
+.dashboard-container {
+  max-width: 100%;
+  overflow: auto;
+  background: var(--input-background);
+}
+
+.app-dashboard-controls > *{
+  margin-left: 8px;
+}
+
+
+.button {
+  margin-left: 8px;
+}

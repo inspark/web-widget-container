@@ -1,0 +1,75 @@
+<div class="c-panel__body">
+  <table class="c-table c-table_hover c-table_vertical-align-middle">
+    <thead>
+    <tr>
+      <th>
+        {{'Switch state' | translate}}
+      </th>
+      <th>
+        <div>{{'Title' | translate}}</div>
+      </th>
+      <th>
+        {{'Control mode' | translate}}
+      </th>
+      <th>
+        {{'Last switching' | translate}}
+      </th>
+      <th>
+        {{'Manual mode' | translate}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let param of values.signal.items">
+      <td>
+        <div>
+          <label class="c-checkbox c-checkbox_switch">
+            <div class="c-checkbox__label u-vertical-align-middle u-text_center">
+              <div>{{'Off' | translate}}.</div>
+            </div>
+            <input type="checkbox" [checked]="param.value" class="c-checkbox__input"
+                   (click)="paramSave(param)"
+                   (change)="param.value = param.value ? 0 : 1"
+            >
+            <i class="c-checkbox__icon u-margin-left-tiny u-vertical-align-baseline"></i>
+            <div class="c-checkbox__label u-vertical-align-middle u-text_center">
+              <div>{{'On' | translate}}.</div>
+            </div>
+          </label>
+        </div>
+        <div [hidden]="!(param.data && param.data.locked)">
+          {{'Locked' | translate}}
+        </div>
+
+      </td>
+      <td>
+        <div class="">{{param.title}}</div>
+        <div class="u-margin-bottom-tiny">{{param.device.object.shortname}}</div>
+        <div class="u-margin-bottom-tiny">{{param.zone}}</div>
+      </td>
+      <td>{{(param.data?.manually && 'Manually' || 'Scheduled') | translate}}</td>
+      <td class="u-position-relative">
+        <div>
+          {{param.data && param.data.date | date:"dd.MM.yyyy HH:mm"}}
+        </div>
+      </td>
+      <td class="u-text_center">
+        <div *ngIf="param.data && param.data.manually !== undefined">
+          <label class="c-checkbox c-checkbox_compact">
+          {{param.data.manually ? 'On' : 'Off'}}
+          </label>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+/* ==========================================================================
+   #TYPOGRAPHY Paragraph
+   ========================================================================== */
+
+/*
+Paragraph
+
+Default paragraph text. Use the paragraph class to style your paragraphs!
+
+markup:
+<p>Paragraph without class</p>
+<p class="c-paragraph">Paragraph with class .c-paragraph.</p>
+
+Styleguide 4.2.2
+*/
+
+// Reset margins on paragraphs
+//
+// Similarly, the top margin on `<p>`s get reset. However, we also reset the
+// bottom margin to use `rem` units instead of `em`.
+p {
+  margin-top: 0;
+  margin-bottom: inuit-rem($inuit-global-spacing-unit);
+}
+
+p {
+  color: $paragraph-color;
+}

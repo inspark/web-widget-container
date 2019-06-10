@@ -1,0 +1,235 @@
+/* ==========================================================================
+   #TYPOGRAPHY
+   ========================================================================== */
+
+/*
+Typography
+
+Style text as components.
+
+Styleguide 6.1.2.0
+*/
+
+/*
+Text
+
+mono - monotype font-family
+quiet - muted text
+display-1 - display-1
+display-2 - display-2
+display-3 - display-3
+display-4 - display-4
+
+markup:
+<div class="c-text c-text_{$modifiers}">
+  Some text styled with text component.
+</div>
+
+Styleguide 6.1.2.1
+*/
+.c-text {
+  color: $text-color;
+  font-family: $text-font-family;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-computed;
+}
+
+.c-text_mono {
+  font-family: $text-font-family-mono;
+}
+
+//.c-text_highlight {
+//  @include text_highlight;
+//}
+
+.c-text_quiet {
+  color: $text-muted;
+}
+
+// Type display classes
+.c-text_display-1 {
+  font-size: $display1-size;
+  font-weight: $display1-weight;
+  line-height: $display-line-height;
+}
+
+.c-text_display-2 {
+  font-size: $display2-size;
+  font-weight: $display2-weight;
+  line-height: $display-line-height;
+}
+
+.c-text_display-3 {
+  font-size: $display3-size;
+  font-weight: $display3-weight;
+  line-height: $display-line-height;
+}
+
+.c-text_display-4 {
+  font-size: $display4-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+.c-text_display-5 {
+  font-size: $display5-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+// 2rem
+.c-text_display-6 {
+  font-size: $display6-size;
+  font-weight: $display4-weight;
+  //line-height: $display-line-height;
+}
+
+.c-text_widget-value-large {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 0.9;
+
+  @include screen_medium-and-up {
+    font-size: 3.5rem;
+  }
+}
+
+.c-text_widget-value-middle {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 0.9;
+
+  @media (min-width: #{map-get($screen-limits, xlarge)}) {
+    font-size: 3rem;
+  }
+}
+
+.c-text_widget-value-small {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 0.9;
+
+  @media (min-width: #{map-get($screen-limits, xlarge)}) {
+    font-size: 2rem;
+  }
+}
+
+.c-text_widget-value-small {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 0.9;
+
+  @media (min-width: #{map-get($screen-limits, xlarge)}) {
+    font-size: 1.5rem;
+  }
+}
+
+.c-text_gray {
+  color: $text-color-gray;
+}
+
+.c-text_color-success {
+  color: $text-color-success;
+}
+
+.c-text_color-warning {
+  color: $text-color-warning;
+}
+
+.c-text_color-error {
+  color: $text-color-error;
+}
+
+.c-text_color-critical {
+  color: $text-color-critical;
+}
+
+//.c-text_help[title] {
+//  border-bottom: $help-border-bottom;
+//  cursor: help;
+//}
+
+/*
+Pre
+
+markup:
+<div class="c-pre">
+  Some text styled with c-pre.
+</div>
+
+Styleguide 6.1.2.2
+*/
+.c-pre {
+  margin: 0;
+}
+
+//.c-code {
+//  @include code;
+//}
+//
+//.c-code_multiline {
+//  display: block;
+//  padding: $spacing-small $spacing-medium;
+//  border-radius: $border-radius;
+//  white-space: pre;
+//  overflow-x: auto;
+//}
+//
+//.c-kbd {
+//  @include code($keyboard-color, $keyboard-background-color);
+//  border-bottom: $keyboard-border;
+//  border-radius: $keyboard-border-radius;
+//}
+//
+//.c-blockquote {
+//  @include quotation_color;
+//  display: block;
+//  margin: $quotation-margin;
+//  padding: $quotation-padding;
+//  font-family: $quotation-font-family;
+//}
+//
+//.c-blockquote_brand {
+//  @include quotation_color($quotation-brand-border-color);
+//}
+//
+//.c-blockquote_info {
+//  @include quotation_color($quotation-info-border-color);
+//}
+//
+//.c-blockquote_warning {
+//  @include quotation_color($quotation-warning-border-color);
+//}
+//
+//.c-blockquote_success {
+//  @include quotation_color($quotation-success-border-color);
+//}
+//
+//.c-blockquote_error {
+//  @include quotation_color($quotation-error-border-color);
+//}
+//
+//.c-blockquote__body {
+//  @include paragraph;
+//  font-size: $quotation-font-size;
+//}
+//
+//.c-blockquote__footer {
+//  @include paragraph;
+//  color: $quotation-footer-color;
+//  font-style: $quotation-footer-font-style;
+//}
+
+/*
+Paragraph
+
+markup:
+<div class="c-paragraph">
+  Paragraph text styled with c-paragraph.
+</div>
+
+Styleguide 6.1.2.3
+*/
+.c-paragraph {
+  @include paragraph;
+}

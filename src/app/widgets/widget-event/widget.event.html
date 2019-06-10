@@ -1,0 +1,15 @@
+<table class="c-table c-table_striped c-table_condensed" *ngIf="values.events.config">
+    <thead>
+    <tr>
+        <th>N</th>
+        <th class="c-table__cell-sticky"
+            *ngFor="let tblhead of values.events.config.titleList">{{tblhead | translate}}</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="values.events.data">
+    <tr *ngFor="let tblrow of values.events.data.rowList; let idx = index">
+        <td>{{idx + 1}}</td>
+        <td *ngFor="let key of values.events.config.attrList">{{tblrow[key]}}</td>
+    </tr>
+    </tbody>
+</table>

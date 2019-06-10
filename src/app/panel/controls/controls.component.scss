@@ -1,0 +1,63 @@
+.add-widget {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
+
+.widget-container {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.widget-block {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+}
+
+
+.sidebar {
+  background: var(--main-background);
+  position: absolute;
+  left: 0;
+  top: 35px;
+  bottom: 0;
+  height: 100vh;
+  z-index: 100;
+  width: 300px;
+  box-shadow: 0 0 3px 8px rgba(0, 0, 0, .1);
+  overflow: auto;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+
+  & > * {
+    margin-left: 5px;
+  }
+}
+
+.left-side {
+}
+
+.controls-panel {
+  height: 41px;
+  border-radius: 2px;
+  padding: 4px 0;
+  margin: 0 5px 5px;
+  display: flex;
+}
+
+
+.dashboard-list {
+  position: relative;
+}

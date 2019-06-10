@@ -1,0 +1,26 @@
+//@import "../settings/settings.global";
+
+//@mixin text_highlight($color: $highlight-color, $background-color: $highlight-background-color) {
+//  margin: 0 -$spacing-tiny;
+//  padding: $spacing-xsmall $spacing-xsmall $spacing-tiny;
+//  background-color: $background-color;
+//  color: $color;
+//}
+
+@mixin paragraph {
+  display: block;
+  margin: 0;
+  padding: inuit-rem($inuit-global-spacing-unit-small) 0;
+  color: $paragraph-color;
+}
+
+//@mixin code($color: $code-color, $background-color: $code-background-color) {
+//  @include text_highlight($color, $background-color);
+//  display: inline;
+//  font-family: $text-font-family-mono;
+//  font-weight: $text-font-weight;
+//}
+//
+//@mixin quotation_color($border-color: $quotation-border-color) {
+//  border-left: $quotation-border-width $quotation-border-style $border-color;
+//}

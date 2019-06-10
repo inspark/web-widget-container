@@ -1,0 +1,17 @@
+<form (submit)="generate()">
+  <div *ngFor="let item of config;">
+    <div>Element: {{item.name}} </div>
+    <div *ngIf="item.itemType === ITEM_TYPE.series">
+      Type of chart:
+      <select name="chartype" [(ngModel)]="item.config.charttype">
+        <option value="lineChart">lineChart</option>
+        <option value="candlestickBarChart">candlestickBarChart</option>
+        <option value="stackedAreaChart">stackedAreaChart</option>
+        <option value="histogramChart">histogramChart</option>
+      </select>
+    </div>
+  </div>
+  <button >Generate</button>
+</form>
+
+

@@ -1,0 +1,145 @@
+@mixin grid {
+  display: flex;
+}
+
+@mixin grid_wrap {
+  flex-wrap: wrap;
+}
+
+@mixin grid_nowrap {
+  flex-wrap: nowrap;
+}
+
+@mixin grid_top {
+  align-items: flex-start;
+}
+
+@mixin grid_center {
+  align-items: center;
+}
+
+@mixin grid_bottom {
+  align-items: flex-end;
+}
+
+@mixin grid__cell {
+  flex: 1;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+@mixin grid__cell_no-gutter {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@mixin grid__cell_yes-gutter {
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+@mixin grid__cell_top {
+  align-self: flex-start;
+}
+
+@mixin grid__cell_center {
+  align-self: center;
+}
+
+@mixin grid__cell_bottom {
+  align-self: flex-end;
+}
+
+@mixin grid__cell_width-fixed {
+  flex: 0 1 auto;
+}
+
+@mixin grid__cell_width-auto {
+  flex: 1 1 auto;
+}
+
+@mixin grid__cell_fit {
+  flex: 1;
+}
+
+@mixin grid_full {
+  flex-wrap: wrap;
+}
+
+@mixin grid__responsive($screen-width) {
+  &_wrap\@#{$screen-width} {
+    @include grid_wrap;
+  }
+
+  &_nowrap\@#{$screen-width} {
+    @include grid_nowrap;
+  }
+
+  &__cell_yes-gutter\@#{$screen-width} {
+    @include grid__cell_yes-gutter;
+  }
+
+  &__cell_no-gutter\@#{$screen-width} {
+    @include grid__cell_no-gutter;
+  }
+}
+
+@mixin grid__cell_full {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-left: 0;
+}
+
+@mixin grid__cell_hidden {
+  display: none;
+}
+
+@mixin grid__cell_visible {
+  display: initial;
+}
+
+@mixin grid__cell_width($width) {
+  flex: 0 0 $width;
+  max-width: $width;
+}
+
+@mixin grid__cells {
+  @each $width, $fraction in $grid-widths {
+    &_width-#{$width} {
+      @include grid__cell_width($fraction * 100%);
+    }
+
+    &_offset-#{$width} {
+      margin-left: $fraction * 100%;
+    }
+  }
+}
+
+@mixin grid__responsive-cells($screen-width) {
+  @each $width, $fraction in $grid-widths {
+    &_hidden\@#{$screen-width} {
+      @include grid__cell_hidden;
+    }
+
+    &_visible\@#{$screen-width} {
+      @include grid__cell_visible;
+    }
+
+    &_width-#{$width}\@#{$screen-width} {
+      flex: 0 0 $fraction * 100%;
+      max-width: $fraction * 100%;
+    }
+
+    &_offset-#{$width}\@#{$screen-width} {
+      margin-left: $fraction * 100%;
+    }
+
+    &_width-fixed\@#{$screen-width} {
+      @include grid__cell_width-fixed;
+    }
+
+    &_width-auto\@#{$screen-width} {
+      @include grid__cell_width-auto;
+    }
+  }
+}

@@ -1,0 +1,993 @@
+// Theme "Contrast"
+
+// Set a variable containing current brand
+$theme-name: 'theme-contrast';
+
+// SETTINGS
+@import "settings/loader.settings";
+@import "../themes/contrast";
+// Reset theme-specific variables
+
+/*
+Colors
+*/
+
+/*
+Brand colors
+*/
+
+/**
+ * Primary
+ */
+$color-brand-cold-primary: #067394;
+$color-brand-shine-primary: $color-yellow-dark-500;
+$color-brand-warm-primary: $color-orange-dark-500;
+// todo(turchaninov): отрефакторить названия переменных
+
+/**
+ * Secondary
+ */
+$color-brand-cold-secondary: #0d485a;
+$color-brand-shine-secondary: $color-yellow-dark-500;
+$color-brand-warm-secondary: $color-orange-dark-500;
+
+/*
+Status colors
+*/
+$color-status-active: $color-brand-cold-primary;
+$color-status-active-light: #e6eef1 !default;
+$color-status-highlight: $color-blue-dark;
+$color-status-success: #147900;
+$color-status-success-dark: darken($color-green, 15);
+$color-status-attention: $color-brand-shine-secondary;
+$color-status-warning: #997300; //$color-orange
+$color-status-error: #a00000;
+$color-status-pending: $color-blue;
+$color-status-critical: $color-orange-dark;
+$color-status-disabled: rgba(#848484, 0.8);
+$color-status-falsevalue: #848484;
+
+/*
+Functional colors
+*/
+$component-active-color: $color-base-white;
+$component-active-bg: rgba($color-brand-cold-primary, 0.4);
+$component-active-box-shadow: inset 0 0 0 1px transparent;
+$state-success-bg: rgba($color-status-success, 0.2);
+$state-success-text: $color-base-white;
+$state-warning-bg: rgba($color-status-warning, 0.2);
+$state-warning-text: $color-base-white;
+$state-error-bg: rgba($color-status-error, 0.2);
+$state-error-text: $color-base-white;
+$state-pending-bg: rgba($color-status-pending, 0.2);
+$state-pending-text: $color-base-white;
+$state-critical-bg: rgba($color-status-critical, 0.2);
+$state-critical-text: $color-base-white;
+
+///* ========================================================================
+//   #GLOBAL
+//   ======================================================================== */
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg: $color-gray-5;
+$body-color: $color-base-black;
+
+// Scroll customization
+
+$webkit-scrollbar-track-bg: $color-base-white;
+$webkit-scrollbar-thumb-bg: $color-gray-10;
+$webkit-scrollbar-corner-bg: $color-gray-5;
+
+// Links
+//
+// Style anchor elements.
+// Links
+//
+// Style anchor elements.
+
+$link-color: $color-brand-cold-primary;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline;
+
+//
+// Typography
+//
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$text-color: $color-base-black;
+$text-color-gray: $color-gray-40;
+
+$paragraph-color: $text-color;
+
+//** By default, this inherits from the `<body>`.
+$headings-color: $color-gray-90;
+$headings-small-color: $color-base-black;
+
+$text-muted: rgba($text-color, 0.8);
+
+$abbr-border-color: $color-gray-80;
+
+$blockquote-small-color: $color-gray-80;
+$blockquote-border-color: $color-gray-80;
+
+$hr-border-color: rgba($color-base-black, 0.1);
+
+$kbd-box-shadow: inset 0 -0.1rem 0 rgba($color-base-black, 0.25);
+
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color: $color-base-white;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg: $color-brand-cold-primary;
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-bg: transparent;
+$table-th-color: $color-gray-90;
+$table-bg-accent: rgba($color-base-black, 0.05);
+$table-bg-hover: rgba($color-base-black, 0.075);
+$table-bg-active: $table-bg-hover;
+
+$table-head-bg: $color-gray-10;
+$table-head-color: $color-gray-90;
+
+$table-border-color: $color-gray-20;
+$table-bg-primary: $color-brand-cold-primary;
+
+// Buttons
+
+$btn-disabled-border-color: transparent;
+$btn-disabled-background: $color-gray-5;
+$btn-disabled-color: rgba($color-base-black, 0.4);
+
+$btn-default-background: $color-gray-5;
+$btn-default-background--hover: darken($btn-default-background, 20%);
+$btn-default-background--pressed: darken($btn-default-background, 40%);
+$btn-default-color: $text-color;
+
+$btn-shadow: none;
+
+$btn-bare-color--visited: $color-gray-90;
+$btn-bare-color--hover: $color-blue-dark-800;
+$btn-bare-color--pressed: $color-brand-cold-secondary;
+
+$btn-primary-color: $color-base-white;
+$btn-primary-border-color: transparent;
+$btn-primary-background: $color-brand-cold-primary;
+$btn-primary-background--hover: darken($btn-primary-background, 20%);
+$btn-primary-background--pressed: darken($btn-primary-background, 40%);
+$btn-primary-background--disabled: $btn-disabled-background;
+$btn-primary-color--disabled: $btn-disabled-color;
+
+$btn-secondary-color: $color-base-white;
+$btn-secondary-border-color: transparent;
+$btn-secondary-background: $color-brand-cold-secondary;
+$btn-secondary-background--hover: darken($btn-secondary-background, 20%);
+$btn-secondary-background--pressed: darken($btn-secondary-background, 40%);
+
+$btn-tertiary-color: $color-base-black;
+$btn-tertiary-border-color: transparent;
+$btn-tertiary-background: $color-gray-40;
+$btn-tertiary-background--hover: darken($btn-tertiary-background, 20%);
+$btn-tertiary-background--pressed: darken($btn-tertiary-background, 40%);
+
+$btn-menu-toggle: $color-gray-90;
+
+$btn-destroy-border-color: $color-status-error;
+$btn-destroy-background: $color-status-error;
+$btn-destroy-color: $color-base-white;
+
+$btn-rounded-border-radius: $global-radius-rounded;
+
+$btn-datepicker-current-color: $color-brand-cold-primary;
+$btn-datepicker-current-background: none;
+
+$btn-datepicker-selected-color: $color-base-white;
+$btn-datepicker-selected-color--hover: $color-base-white;
+$btn-datepicker-selected-color-current: $color-base-white;
+$btn-datepicker-selected-color-current--hover: $color-base-white;
+
+// Forms
+
+/// Sets the forms Font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-color: $color-base-black;
+
+/// Sets the forms Placeholder font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default] -
+$inuit-forms-color_placeholder: rgba($color-gray-80, 0.7);
+
+/// Sets the forms Background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default] - Background color
+$inuit-forms-background: rgba($color-base-black, 0.1);
+
+/// Sets the forms Inner border string
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-border_inner: $component-active-box-shadow;
+
+/// Sets the forms Outer border string
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-border_outer: 1px solid transparent;
+
+/// Sets the forms Focused inner border string
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default] - Focused inner border string
+$inuit-forms-border_inner_focused: 0 0 7px 0 rgba($color-brand-cold-primary, 0.4); //inset 0 0 0 1px $inuit-forms-background;
+
+/// Sets the forms Focused outer border color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-border_outer_focused: rgba($color-brand-cold-primary, 0.4);
+
+/// Sets the forms Disable font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-color_disabled: $color-gray-80;
+
+/// Sets the forms Disabled backgroundn color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-background_disabled: rgba($color-gray-10, 0.8);
+
+/// Sets the forms Disabled border string
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-border_disabled: $color-gray-5;
+
+/// Sets the forms Readonly font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-color_readonly: $color-gray-90;
+
+/// Sets the forms Readonnly background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-background_readonly: transparent;
+
+/// Sets the forms Readonly border string
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-border_readonly: none;
+
+/// Sets the forms Select dropdown background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-background: $inuit-forms-background;
+
+/// Sets the forms Select dropdown font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-color: $color-base-black;
+
+/// Sets the forms Select dropdown chevron font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-color-svg: #{$color-base-black};
+
+/// Sets the forms Select dropdown dark shadow
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-select-shadow_dark: 0 1px 0 rgba($color-base-white, 0.1);
+
+/// Sets the forms Select dropdown light shadow
+///
+/// @group px-forms-design:variables:style
+/// @type Color | String [default]
+$inuit-forms-select-shadow_light: 0 1px 0 rgba($color-base-white, 0.1);
+
+/// Sets the forms Select dropdown disabled font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-color_disabled: $color-gray-90;
+
+/// Sets the forms Select dropdown disabled chevron font color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-color-svg_disabled: #{$color-base-white};
+
+/// Sets the forms Select dropdown disabled background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-background_disabled: $inuit-forms-background_disabled;
+
+/// Sets the forms Select dropdown hover background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-background_hover: $inuit-forms-select-background;
+
+/// Sets the forms Select dropdown hover border color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-border_hover: rgba($color-brand-cold-primary, 0.75);
+
+/// Sets the forms Select dropdown pressed background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-background_pressed: $inuit-forms-select-background;
+
+/// Sets the forms Select dropdown pressed border color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-border_pressed: $inuit-forms-border_outer_focused;
+
+/// Sets the forms Multiple select background color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-select-multiple-background: $color-gray-35;
+
+/// Sets the forms Validation warning color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-validation-warning: $color-status-warning;
+
+/// Sets the forms Validation error color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-validation-error: $color-status-error;
+
+/// Sets the forms Validation success color
+///
+/// @group px-forms-design:variables:style
+/// @type Color [default]
+$inuit-forms-validation-success: $color-status-success;
+
+// Checkbox
+$control-checkbox-border-color: $color-gray-10;
+
+// Switch
+$checkbox-swith-color-off: $color-gray-20;
+
+// List
+$list-item-background: $color-base-white;
+$list-item-border: transparent;
+$list-item-background-active: $color-brand-cold-primary;
+$list-item-background-hover: $color-gray-5;
+
+$list-scrollable-border-color: $color-gray-10;
+$list-scrollable-background: $color-base-white;
+
+// List group
+
+$list-group-color: $body-color;
+$list-group-bg: $color-base-white;
+$list-group-border-color: rgba($color-gray-20, 0.125);
+
+$list-group-hover-bg: $color-gray-40;
+$list-group-active-color: $component-active-color;
+$list-group-active-bg: $component-active-bg;
+$list-group-active-border: $list-group-active-bg;
+$list-group-active-text-color: lighten($list-group-active-bg, 50%);
+
+$list-group-disabled-color: $color-gray-80;
+$list-group-disabled-bg: $color-gray-40;
+$list-group-disabled-text-color: $list-group-disabled-color;
+
+$list-group-link-color: $color-gray-90;
+$list-group-link-heading-color: $color-gray-90;
+$list-group-link-hover-color: $color-base-black;
+
+$list-group-link-active-color: $list-group-color;
+$list-group-link-active-bg: rgba($color-brand-cold-secondary, 0.5);
+
+// Nav
+
+$nav-link-padding: $unit-tiny;
+$nav-link-hover-bg: rgba($color-brand-cold-primary, 0.2);
+$nav-disabled-link-color: $color-brand-cold-primary;
+$nav-disabled-link-hover-color: $color-gray-40;
+
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+//** Default background color used for all tables.
+//$table-bg: transparent;
+//** Background color used for `.table-striped`.
+//$table-bg-accent: $color-gray-10;
+//** Background color used for `.table-hover`.
+//$table-bg-hover: $color-gray-35;
+//$table-bg-active: $table-bg-hover;
+
+//** Border color for table and cell borders.
+//$table-border-color: $color-gray-40;
+
+//== Menu
+$main-menu-item-li-bg: $color-brand-cold-secondary;
+$main-menu-item-a-color: $main-menu-item-li-bg;
+//$main-menu-item-symbol: $color-gray-90;
+$main-menu-item-a-color-hover: $color-base-white;
+$menu-ddl-menu-bg: $main-menu-item-li-bg;
+$main-menu-submenu-item-bg: #265b6b;
+$main-menu-item-title-color: $color-base-white;
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+
+//** Background for the dropdown menu.
+$dropdown-bg: $color-gray-5;
+//** Dropdown menu `border-color`.
+$dropdown-border: rgba(255, 255, 255, 0.5);
+
+$dropdown-focused-box-shadow: $component-active-box-shadow;
+//** Dropdown menu `border-color` **for IE8**.
+$dropdown-fallback-border: $color-gray-35;
+//** Divider color for between dropdown items.
+$dropdown-divider-bg: #e5e5e5;
+
+//** Dropdown link text color.
+$dropdown-link-color: $color-base-black;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color: $color-base-black;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg: rgba($color-gray-10, 0.8);
+
+//** Active dropdown menu item text color.
+$dropdown-link-active-color: $color-base-black;
+//** Active dropdown menu item background color.
+$dropdown-link-active-bg: rgba($component-active-bg, 0.3);
+
+//** Disabled dropdown menu item background color.
+$dropdown-link-disabled-color: $color-gray-80;
+$dropdown-link-disabled-bg: $color-gray-35;
+
+//** Text color for headers within dropdown menus.
+$dropdown-header-color: $color-gray-90;
+
+//** Deprecated `$dropdown-caret-color` as of v3.1.0
+$dropdown-caret-color: $color-base-black;
+
+// Sidebar
+$sidebar-bg: $color-brand-cold-secondary;
+
+// Navbar
+
+// Basics of a navbar
+$navbar-default-color: $color-base-black;
+$navbar-default-bg: $color-base-white;
+$navbar-default-border: darken($navbar-default-bg, 6.5%);
+
+// Navbar links
+$navbar-default-link-color: $color-brand-cold-primary;
+$navbar-default-link-hover-color: $color-brand-cold-secondary;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-color: $color-brand-cold-primary;
+$navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-disabled-color: $color-gray-40;
+$navbar-default-link-disabled-bg: transparent;
+
+// Navbar brand label
+$navbar-default-brand-color: $navbar-default-link-color;
+$navbar-default-brand-hover-color: darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-bg: transparent;
+
+// Navbar toggle
+//$navbar-default-toggle-hover-bg:           #ddd;
+$navbar-default-toggle-hover-color: $color-brand-cold-primary;
+$navbar-default-toggle-icon-bar-bg: #888;
+$navbar-default-toggle-border-color: #ddd;
+$navbar-default-toggle-color: $color-base-black;
+
+// Tree table
+$tree-table-cell: $color-gray-5;
+$tree-table__cell-content_header: $color-gray-80;
+
+// Main content
+$main-content-bg: $color-status-active-light;
+$main-section-bg: $color-status-active-light;
+
+//== Panels (Cards)
+//
+//##
+
+$panel-bg: $color-base-white;
+
+//** Border color for elements within panels
+$panel-footer-bg: $panel-bg;
+
+$panel-default-text: $text-color;
+$panel-default-border: transparent;
+$panel-default-heading-bg: $panel-bg;
+
+$panel-primary-text: $color-base-black;
+$panel-primary-border: $color-brand-cold-primary;
+$panel-primary-heading-bg: $color-brand-cold-secondary;
+
+$panel-success-text: $text-color;
+$panel-success-border: $color-status-success;
+$panel-success-heading-bg: $panel-bg;
+
+$panel-info-text: $text-color;
+$panel-info-border: $color-status-highlight;
+$panel-info-heading-bg: $panel-bg;
+
+$panel-warning-text: $text-color;
+$panel-warning-border: $color-status-warning;
+$panel-warning-heading-bg: $panel-bg;
+
+$panel-danger-text: $text-color;
+$panel-danger-border: $color-status-error;
+$panel-danger-heading-bg: $panel-bg;
+
+$panel-lighter-background: $color-base-white;
+$panel-body-dashboard-bg: $color-gray-5;
+
+// Breadcrumbs
+//** Breadcrumb background color
+$breadcrumb-bg: $color-status-active-light;
+//** Breadcrumb text color
+$breadcrumb-color: $color-base-black;
+//** Text color of current page in the breadcrumb
+$breadcrumb-active-color: $color-gray-90;
+$breadcrumb-padding-vertical: 8.5px;
+
+// Tooltip
+$tooltip-bg: rgba($color-base-white, 0.95);
+$tooltip-color: $color-base-black;
+$tooltip-arrow-color: $tooltip-bg;
+
+// Modal
+
+//** Background color of modal content area
+$modal-content-bg: $color-base-white;
+//** Modal content border color
+$modal-content-border-color: rgba($color-gray-10, 0.2);
+//** Modal content border color **for IE8**
+$modal-content-fallback-border-color: #ddd;
+
+//** Modal backdrop background color
+$modal-backdrop-bg: $color-base-black;
+//** Modal backdrop opacity
+$modal-backdrop-opacity: 0.5;
+//** Modal header border color
+$modal-header-border-color: $color-gray-40;
+//** Modal footer border color
+$modal-footer-border-color: $modal-header-border-color;
+
+//== Footer
+$footer-bg: $color-base-white;
+
+//== Tabs
+$nav-tabs-border-color: $color-gray-40;
+
+$nav-tabs-link-hover-border-color: $color-gray-80;
+
+$nav-tabs-active-link-hover-bg: $body-bg;
+$nav-tabs-active-link-hover-color: $body-color;
+$nav-tabs-active-link-hover-border-color: $color-brand-cold-primary;
+
+$nav-tabs-justified-link-border-color: $color-gray-40;
+$nav-tabs-justified-active-link-border-color: $body-bg;
+
+$nav-tabs-tab-pane-active-background: $color-gray-5;
+
+//== Pills
+$nav-pills-active-link-hover-bg: $component-active-bg;
+$nav-pills-active-link-hover-color: $component-active-color;
+
+// Badges
+
+$badge-default-bg: $color-gray-10;
+$badge-primary-bg: $color-brand-cold-primary;
+$badge-success-bg: $state-success-bg;
+$badge-pending-bg: $state-pending-bg;
+$badge-warning-bg: $state-warning-bg;
+$badge-error-bg: $state-error-bg;
+$badge-critical-bg: $state-critical-bg;
+$badge-color: $color-base-white;
+$badge-link-hover-color: $color-base-white;
+
+// Spinner
+$spinner-loader-color: $color-gray-40;
+
+// Login
+$login-form-bg: $color-base-white;
+
+// NVD3 Charts
+$nvd3-box-shadow: $component-active-box-shadow;
+$nvd3-border-radius: $global-radius;
+$nvd3-font-family: $font-family-base;
+$nvd3-font-size-base: $font-size-base;
+$nvd3-text-color: $text-color;
+$nvd3-text-color-fill: $nvd3-text-color;
+$nvd3-text-color-stroke: $nvd3-text-color;
+
+$nvd3-background-fill: $body-bg;
+$nvd3-background-fill-opacity: 0;
+$nvd3-nv-brush-resize-fill: $color-gray-5;
+$nvd3-nv-brush-resize-stroke: $color-gray-40;
+$nvd3-nv-brush-background-stroke: $color-base-black;
+$nvd3-nv-brush-background-fill: $color-base-white;
+$nvd3-axis-path-stroke: $color-base-black;
+$nvd3-axis-line: rgba($color-gray-10, 0.6);
+
+// NVD3 Controls
+$nvd3-controls-fill: $color-base-black;
+
+// NVD3 Transitions
+$nvd3-transition-duration-default: 250ms;
+$nvd3-transition-duration-short: 50ms;
+$nvd3-transition-function-default: linear;
+$nvd3-transition-delay-default: 200ms;
+$nvd3-transition-default: $nvd3-transition-duration-default $nvd3-transition-function-default;
+
+// Bars
+$nvd3-bars-react-hover: $color-brand-cold-primary;
+
+// Boxplot
+$nvd3-boxplot-median-stroke: $color-base-black;
+
+// Bullet
+$nvd3-bullet-marker-stroke: $color-base-black;
+$nvd3-bullet-marker-triangle-stroke: $nvd3-bullet-marker-stroke;
+$nvd3-bullet-marker-triangle-fill: $color-base-white;
+$nvd3-bullet-marker-line-stroke: $nvd3-bullet-marker-stroke;
+$nvd3-bullet-tick-line-stroke: $color-gray-40;
+$nvd3-bullet-range-s0-fill: $color-gray-5;
+$nvd3-bullet-range-s1-fill: $color-gray-10;
+$nvd3-bullet-range-s2-fill: $color-gray-20;
+$nvd3-bullet-subtitle-fill: $color-gray-10;
+$nvd3-bullet-range-fill: $color-gray-5;
+
+// Candlestick Bar
+$nvd3-candlestickbar-tick-positive-rect-stroke: $color-status-success;
+$nvd3-candlestickbar-tick-positive-rect-fill: $nvd3-candlestickbar-tick-positive-rect-stroke;
+$nvd3-candlestickbar-tick-negative-rect-stroke: $color-status-error;
+$nvd3-candlestickbar-tick-negative-rect-fill: $nvd3-candlestickbar-tick-negative-rect-stroke;
+$nvd3-candlestickbar-ticks-line-stroke: $color-gray-40;
+
+// Force Directed Graph
+$nvd3-force-node-stroke: $color-base-white;
+$nvd3-force-link-stroke: $color-gray-20;
+
+// Lines
+$nvd3-lines-groups-line-fill: none;
+$nvd3-lines-groups-area-stroke: none;
+$nvd3-lines-point-paths-stroke: $color-gray-10;
+$nvd3-lines-point-paths-fill: $color-gray-5;
+
+// OHLC
+$nvd3-ohlcbar-tick-positive-stroke: $color-status-success;
+$nvd3-ohlcbar-tick-negative-stroke: $color-status-error;
+
+// Parallel Coordinates
+$nvd3-background-path-fill: none;
+$nvd3-background-path-stroke: $color-gray-5;
+$nvd3-foreground-path-fill: none;
+$nvd3-parallelcoordinates-brush-extent-fill: $color-base-white;
+$nvd3-parallelcoordinates-brush-extent-stroke: $color-gray-40;
+$nvd3-missingvaluesline-line-fill: none;
+$nvd3-missingvaluesline-line-stroke: $color-base-black;
+
+// Pie
+$nvd3-pie-title-font-size: $inuit-font-size-h3;
+$nvd3-pie-title-fill: $color-brand-cold-primary;
+$nvd3-pie-slice-text-stroke: $color-base-black;
+$nvd3-pie-path: $color-base-white;
+
+// Sparkline
+$nvd3-sparkline-path-fill: none;
+$nvd3-sparklineplus-hovervalue-stroke: $color-gray-80;
+$nvd3-sparklineplus-yvalue-stroke: lighten($color-status-error, 20%);
+$nvd3-sparklineplus-maxvalue-stroke: $color-status-success;
+$nvd3-sparklineplus-maxvalue-fill: $color-status-success;
+$nvd3-sparklineplus-minvalue-stroke: $color-status-error;
+$nvd3-sparklineplus-minvalue-fill: $color-status-error;
+$nvd3-sparklineplus-currentvalue-font-size: $inuit-font-size-large;
+
+// NVD3 Tooltip
+$nvd3-tooltip-zindex: $zindex-tooltip;
+$nvd3-tooltip-font-size: $inuit-font-size-small;
+$nvd3-tooltip-background: $body-bg;
+$nvd3-tooltip-border: $text-color;
+$nvd3-tooltip-color: $text-color;
+$nvd3-tooltip-x-y-tooltip-padding: $unit-small;
+$nvd3-tooltip-xy-tooltip-background: $nvd3-tooltip-background;
+$nvd3-tooltip-h3-background: $body-bg;
+$nvd3-tooltip-h3-color: $text-color;
+$nvd3-tooltip-h3-border-bottom-color: $nvd3-tooltip-h3-background;
+$nvd3-tooltip-table-percent: $color-gray-35;
+$nvd3-tooltip-table-legend-color-guide-border: $color-gray-40;
+$nvd3-guideline-stroke: $color-gray-40;
+
+$nvd3-color-1: #007A4B;
+$nvd3-color-2: #3477DB;
+$nvd3-color-3: #D252B2;
+$nvd3-color-4: #708090;
+$nvd3-color-5: #AF851A;
+$nvd3-color-6: #BB671C;
+$nvd3-color-7: #E00000;
+$nvd3-color-8: #005031;
+$nvd3-color-9: #34415E;
+$nvd3-color-10: #58007E;
+$nvd3-color-11: #2E343B;
+
+// Logout
+$logout-link-color: $dropdown-link-color;
+
+// Cards
+
+$card-border-color: rgba($color-base-white, .125);
+$card-cap-bg: rgba($color-base-white, .03);
+$card-bg: $color-gray-5;
+
+// PrimeNG tables
+
+// $pm-table-padding-vertical: $unit-tiny;
+// $pm-table-padding-horizontal: $unit-small;
+
+$pm-table-head-background: rgba($color-base-black, 0.1);
+$pm-table-head-border: rgba($color-base-white, 0.5);
+
+// PrimeNG treetables
+
+$pm-treetable-head-background: rgba($color-base-black, 0.1);
+$pm-treetable-head-border: rgba($color-base-white, 0.5);
+
+// PrimeNG multiselect
+
+$pm-multiselect-panel-background: $color-gray-5;
+
+//$theme-light-class: ".theme-light";
+
+// NGX-Bootstrap datepicker
+
+$bs-datepicker-main-bg:         $color-gray-5;
+$bs-datepicker-custom-range-bg: #eee;
+
+$bs-datepicker-main-box-shadow: $component-active-box-shadow;
+
+$bs-datepicker-font-color-01:   $body-color;
+$bs-datepicker-font-color-02:   rgba($body-color, 0.8);
+$bs-datepicker-font-color-03:   $body-color;
+$bs-datepicker-font-color-hover: $color-base-white;
+$bs-datepicker-font-color-secondary: rgba($body-color, 0.5);
+$bs-datepicker-font-color-is-other-month: rgba($body-color, 0.25);
+$bs-datepicker-font-color-selected: rgba($body-color, 0.5);
+//$bs-datepicker-font-color-disabled: rgba($color-base-black, 0.25);
+
+$bs-datepicker-border-color:    $dropdown-border;
+
+$bs-datepicker-highlighted-color: $color-base-white;
+$bs-datepicker-highlighted-background: rgba($color-gray-80, 0.5);
+
+$bs-datepicker-btn-bg:          #e9edf0;
+$bs-datepicker-btn-bg-hover:    #d5dadd;
+
+$bs-datepicker-btn-bg2:         #9aaec1;
+$bs-datepicker-btn-bg2-hover:   #54708b;
+
+$bs-datepicker-disabled-background:  rgba(221, 221, 221, 0.3);
+$bs-datepicker-disabled-color:  rgba($color-base-black, 0.6);
+
+$bs-datepicker-selected-background:  $color-brand-cold-primary;
+$bs-datepicker-selected-color:       $color-base-white;
+
+
+
+
+////** Background for the dropdown menu.
+//$dropdown-bg: $color-gray-5;
+////** Dropdown menu `border-color`.
+//$dropdown-border: rgba(255, 255, 255, 0.5);
+//
+//$dropdown-focused-box-shadow: $component-active-box-shadow;
+////** Dropdown menu `border-color` **for IE8**.
+//$dropdown-fallback-border: $color-gray-35;
+////** Divider color for between dropdown items.
+//$dropdown-divider-bg: #e5e5e5;
+//
+////** Dropdown link text color.
+//$dropdown-link-color: $color-base-black;
+////** Hover color for dropdown links.
+//$dropdown-link-hover-color: $color-base-black;
+////** Hover background for dropdown links.
+//$dropdown-link-hover-bg: rgba($color-gray-10, 0.8);
+//
+////** Active dropdown menu item text color.
+//$dropdown-link-active-color: $color-base-black;
+////** Active dropdown menu item background color.
+//$dropdown-link-active-bg: rgba($component-active-bg, 0.3);
+//
+////** Disabled dropdown menu item background color.
+//$dropdown-link-disabled-color: $color-gray-80;
+//$dropdown-link-disabled-bg: $color-gray-35;
+//
+////** Text color for headers within dropdown menus.
+//$dropdown-header-color: $color-gray-90;
+//
+////** Deprecated `$dropdown-caret-color` as of v3.1.0
+//$dropdown-caret-color: $color-base-black;
+
+// Datatime Picker
+
+$owl-dt-timer-input-border: 1px solid rgba($color-base-white, .1);
+$owl-dt-container-bg: $color-gray-35;
+$owl-theme-color: $color-brand-cold-primary;
+$owl-dt-calendar-cell-selected-color: rgba($color-base-black, .85);
+
+// Map
+$map-tooolbar-bg: $color-gray-5;
+
+// Import themed styles
+html.#{$theme-name},
+%html {
+  background: $body-bg;
+}
+
+body.#{$theme-name},
+%body {
+  color: $text-color;
+  background-color: $body-bg;
+}
+
+.#{$theme-name} {
+  // TOOLS
+  @import "tools/loader.tools";
+
+  // GENERIC
+  //@import "generic/loader.generic";
+  @import "generic/generic.themes";
+
+  // ELEMENTS
+  @import "elements/elements.themes";
+  // OBJECTS
+  @import "objects/objects.themes";
+
+  // LIBRARIES
+  //@import '../libraries/loader.libraries';
+
+  // PLUGINS
+  //@import '../plugins/loader.plugins';
+
+  // COMPONENTS
+  // todo(turchaninov): поправить порядок импорта стилей common, app,..
+  //@import "../../../../../src/app/AngularJS/loader.components";
+  @import "../../../../../src/app/AngularJS/app/components.app.themes";
+
+  //@import "common/_loader.components.common.scss";
+
+  @import "../../../../../src/app/AngularJS/common/buttons/components.buttons.themes";
+  @import "../../../../../src/app/AngularJS/common/button-group/component.button-group.themes";
+  @import "../../../../../src/app/AngularJS/common/typography/components.typography.themes";
+  @import "../../../../../src/app/AngularJS/common/forms/components.forms.themes";
+  @import "../../../../../src/app/AngularJS/common/box/components.box.themes";
+  @import "../../../../../src/app/AngularJS/common/nav/components.nav.themes";
+  @import "../../../../../src/app/AngularJS/common/tables/components.tables.themes";
+  //@import "../../../../../src/app/AngularJS/common/grid/components.grid";
+  @import "../../../../../src/app/AngularJS/common/input-group/components.input-group.themes";
+  @import "../../../../../src/app/AngularJS/common/navbar/components.navbar.themes";
+  @import "../../../../../src/app/AngularJS/app/main/menu/components.menu.themes";
+  @import "../../../../../src/app/AngularJS/common/badge/components.badge.themes";
+  @import "../../../../../src/app/AngularJS/app/main/components.main.themes";
+  @import "../../../../../src/app/AngularJS/common/sidepanel/components.sidepanel.themes";
+  @import "../../../../../src/app/AngularJS/common/spinner/components.spinner.themes";
+  @import "../../../../../src/app/AngularJS/app/footer/components.footer.themes";
+  @import "../../../../../src/app/AngularJS/common/panel/components.panels.themes";
+  @import "../../../../../src/app/AngularJS/common/overlay/components.overlay.themes";
+  @import "../../../../../src/app/AngularJS/common/list/components.list.themes.scss";
+  @import "../../../../../src/app/AngularJS/common/list-group/components.list-group.themes.scss";
+  @import "../../../../../src/app/AngularJS/common/crumb/components.crumb.themes";
+  @import "../../../../../src/app/AngularJS/common/treeTable/components.treeTable.themes";
+  @import "../../../../../src/app/AngularJS/common/tooltip/components.tooltip.themes";
+  @import "../../../../../src/app/AngularJS/common/card/components.card.themes";
+  @import "../../../../../src/app/AngularJS/app/main/chartState/components.chartState.themes";
+  @import "../../../../../src/app/AngularJS/app/main/mapState/components.mapState.themes";
+  @import "../../../../../src/app/AngularJS/common/charts-nvd3/components.charts-nvd3.themes";
+  @import "../../../../../src/app/AngularJS/common/icon/components.icon.themes";
+  @import "../../../../../src/app/AngularJS/app/auth/logout/components.logout.themes";
+  @import "../../../../../src/app/AngularJS/app/auth/login/components.login.themes";
+  @import "../../../../../src/app/AngularJS/common/widgets/components.widget.themes";
+  //@import "../../../../../src/app/AngularJS/common/widgets/widgetValue/components.widgetValue";
+  @import "../../../../../src/app/AngularJS/common/widgets/widgetStatus/components.widgetStatus.themes";
+  //@import "../../../../../src/app/AngularJS/common/widgets/widgetSingle/components.widgetSingle";
+
+  // Datatime picker
+
+  @import "../../../../../src/app/shared/patchDatetimePicker/components.ng-pick-datetime.themes";
+
+  // Quill editor
+  @import "../../../../../src/app/shared/ngxQuillEditor/components.quill-editor.themes";
+
+  // PrimeNG
+
+  @import "../../../../app/shared/patchPrimeng/multiselect/primeng.components.multiselect.themes";
+  @import "../../../../app/shared/patchPrimeng/dialog/primeng.components.dialog.themes";
+  @import "../../../../app/shared/patchPrimeng/checkbox/primeng.components.checkbox.themes";
+  @import "../../../../app/shared/patchPrimeng/table/primeng.components.table.themes";
+  @import "../../../../app/shared/patchPrimeng/treetable/primeng.components.treetable.themes";
+
+  // NGX-bootstrap
+
+  @import "../../../../app/shared/patchNgxBootstrap/datepicker/components.bs-datepicker.themes";
+
+  //@import "app/main/_loader.components.state.scss";
+  //@import "app/main/chartState/components.chartState";
+
+
+  // NG2 COMPONENTS
+  //@import "../../../../app/main-temp/main-content-wrapper/main-content-wrapper.component";
+  @import "../../../../app/main-temp/menu/menu.component.themes";
+
+  // Other
+  @import "../../../../app/shared/header/favorite-links/star-icon/star-icon.component.themes.scss";
+
+  // DIRECTIVES
+  //@import "../../../../../src/app/AngularJS/directives/position/directives.position";
+  //@import "../../../../../src/app/AngularJS/directives/collapse/directives.collapse";
+  @import "../../../../../src/app/AngularJS/directives/dropdowns/directives.dropdowns.themes";
+  //@import "../../../../../src/app/AngularJS/directives/typeahead/directives.typeahead";
+  //@import "../../../../../src/app/AngularJS/directives/datepicker/directives.datepicker";
+  //@import "../../../../../src/app/AngularJS/directives/datepickerPopup/directives.datepickerpopup";
+  @import "../../../../../src/app/AngularJS/directives/modal/directives.modal.themes";
+  //@import "../../../../../src/app/AngularJS/directives/timepicker/timepicker";
+  @import "../../../../../src/app/AngularJS/directives/tabs/directives.tabs.themes";
+  @import "../../../../../src/app/AngularJS/directives/tooltip/directives.tooltip.themes";
+
+  // UTILITIES
+
+  //@import "utilities.clearfix";
+
+  //$inuit-offsets: true;
+
+  //@import "utilities/utilities.widths";
+  //@import "utilities/utilities.headings";
+  //@import "utilities/utilities.typography";
+  //@import "utilities/utilities.spacing";
+  //@import "utilities/utilities.lineheight";
+  //@import "utilities/utilities.align";
+  //@import "utilities/utilities.float";
+  //@import "utilities/utilities.print";
+  //@import "utilities/utilities.hide";
+  //@import "utilities/utilities.display";
+  //@import "utilities/utilities.overflow";
+  //@import "utilities/utilities.animation";
+  //@import "utilities/utilities.visibility";
+  @import "utilities/utilities.themes";
+  @import "../../../../app/shared/spinner/spinner.component.theme-light";
+}
+
+// styles for elements whitch are neighbor to body
+.#{$theme-name} +  {
+  @import "../../../../../src/app/AngularJS/common/charts-nvd3/tooltip/components.tooltip.themes";
+}

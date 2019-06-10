@@ -1,0 +1,17 @@
+<div class="c-panel__body" *ngIf="component.config">
+    <div *ngIf="component.config.charttype === CHART_TYPES.candlestickBarChart">
+        {{values.charts.items[0].title}}
+    </div>
+    <div *ngIf="component.config.charttype === CHART_TYPES.histogramChart">
+        {{values.charts.items[0].title}}
+        {{'Average value of the parameter' | translate}} =
+        <!--{{$ctrl.average[$index]}}-->
+    </div>
+    <div class="o-flex o-grid__cell_width-100 o-grid_center">
+        <app-chart class="chart" [values]="component.data" [config]="component.config"></app-chart>
+    </div>
+    <div *ngFor="let item of values.charts.items">
+        <a *ngIf="item.dashboardLink" [href]="'#!/main/dashboard/' + item.dashboardLink.id">{{item.dashboardLink.dashname}}
+            <span *ngIf="item.title"> ({{item.title}})</span></a>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.u-text-truncate {
+  @include text-truncate;
+  max-width: 100%;
+}
+
+.u-overflow-hidden {
+  overflow: hidden;
+}

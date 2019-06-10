@@ -1,0 +1,9 @@
+// _objects.panels.scss
+.o-panel-container_sidepanel {
+  @include theme-light {
+    border-top: 1px solid $color-gray-10;
+    border-bottom: 1px solid $color-gray-10;
+  }
+}
+
+// todo(turchaninov): объекты не должны содержать зависимых от темы стилей. Необходим рефакторинг.
