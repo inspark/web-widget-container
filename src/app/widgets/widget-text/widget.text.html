@@ -1,0 +1,81 @@
+<div class="c-panel__body"
+     [ngStyle]="{'background-image': 'url(' + (pictureId | makePictureUrl) + ')'}"
+     [ngClass]="{'c-panel__body_background-image' : pictureId}">
+  <div class="o-grid o-grid_wrap u-margin-bottom-small" *ngFor="let par of values.data.items">
+    <div class="o-grid__cell u-margin-bottom-tiny u-text_word-wrap_break-word">
+      <div class="u-h3 u-text_primary u-margin-bottom-tiny" [hidden]="!par.title">
+        {{par.title}}
+      </div>
+      <div *ngIf="par.value && par.canEditable">
+        <button class="c-btn c-btn_bare c-btn_border-free c-btn_tiny"
+                (click)="paramEdit(par)">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="o-flex o-grid__cell_width-100 o-grid_center">
+      <a *ngIf="par.dashboardLink && !par.isEditing"
+         class="o-grid__cell o-grid__cell_width-100 c-widget__block c-widget__block_dashname-on-hover o-flex__item c-tooltip c-tooltip_bottom-left"
+         [href]="'#!/main/dashboard/' + par.dashboardLink.id"
+         title="{{par.title}}" [ngStyle]="{cursor: 'pointer'}">
+        <ng-container
+          *ngTemplateOutlet="paramBlock">
+        </ng-container>
+      </a>
+
+      <div *ngIf="!par.dashboardLink || par.isEditing"
+           class="o-grid__cell o-grid__cell_width-100 c-widget__block c-widget__block_dashname-on-hover o-flex__item c-tooltip c-tooltip_bottom-left">
+        <ng-container
+          *ngTemplateOutlet="paramBlock">
+        </ng-container>
+
+      </div>
+
+      <ng-template #paramBlock>
+        <div class="c-widget-value">
+          <p class="u-text_center u-display-inline-block">
+          <p *ngIf="!par.isEditing"
+             style="white-space: pre-line"
+             title="{{par.value}}">
+            {{par.value}}
+          </p>
+
+          <div class="c-widgetValue c-widgetValue_small" *ngIf="par.isEditing">
+            <div
+              class=" u-display-inline-block u-vertical-align-middle "
+              style="position: relative;">
+                            <textarea class="c-input c-input_tiny c-input_block" type="text"
+                                      onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
+                                      required [(ngModel)]="par.value">
+                            </textarea>
+              <div class="u-display-inline-flex">
+                <button class="c-btn c-btn_bare c-btn_border-free c-btn_tiny"
+                        (click)="paramCancel(par)">
+                  <i class="fa fa-close"></i>
+                </button>
+                <button
+                  class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary"
+                  (click)="paramSave(par)">
+                  <i class="fa fa-check"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="par.dashboardLink && !par.isEditing"
+             class="c-widget__block-dashname u-text_right u-text_nowrap u-position-absolute u-position-absolute-right-tiny u-position-absolute-bottom u-margin-bottom-none u-overflow-hidden u-text-overflow_ellipsis"
+             style="width: calc(100% - 20px); bottom: 2px; right: 0;">
+          <a [href]="'#!/main/dashboard/' + par.dashboardLink.id"
+             target="_blank">{{par.dashboardLink.dashname}}</a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+
+
+

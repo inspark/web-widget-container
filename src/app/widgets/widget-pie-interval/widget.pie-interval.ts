@@ -6,7 +6,7 @@ import {
   ItemInterval,
   ParamConfigInterval,
   WidgetParams, Component, WidgetComponentContainer
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 interface PieIntervalInputParameters {
   charts: {
@@ -31,15 +31,17 @@ class WidgetPieIntervalComponent extends WidgetComponent {
   configs: any;
   data: any;
   intervalDates: any;
+
   onUpdate(values) {
     if (values.charts && values.charts.items && values.charts.items.length > 0) {
-      this.prepareDataPie(values);
-      this.prepareIntervalDates(values);
+      const items = values.charts.items.filter(item => item.data);
+      this.prepareDataPie(items, values.charts);
+      this.prepareIntervalDates(items);
     }
   }
 
-  private prepareIntervalDates(values) {
-    this.intervalDates = values.charts.items.reduce((result, item) => {
+  private prepareIntervalDates(items) {
+    this.intervalDates = items.reduce((result, item) => {
       if (!result.beginInterval || !result.endInterval) {
         return {beginInterval: item.data.beginInterval, endInterval: item.data.endInterval};
       }
@@ -50,8 +52,8 @@ class WidgetPieIntervalComponent extends WidgetComponent {
     }, {});
   }
 
-  private prepareDataPie(values) {
-    const pieDataKeys = values.charts.items
+  private prepareDataPie(items, charts) {
+    const pieDataKeys = items
       .map(_item => _item.title)
       .filter((value, index, self) => self.indexOf(value) === index);
 
@@ -64,7 +66,7 @@ class WidgetPieIntervalComponent extends WidgetComponent {
       return points.reduce((_prev, _point) => _point.value + _prev, 0) / points.length;
     };
 
-    const pieData = pieDataKeys.map(_itemTitle => ({'key': _itemTitle, 'value': avg(values.charts, _itemTitle)}));
+    const pieData = pieDataKeys.map(_itemTitle => ({'key': _itemTitle, 'value': avg(charts, _itemTitle)}));
     this.data = {value: '', data: pieData};
     this.configs = {charttype: ChartTypes.pieChart};
   }
@@ -83,7 +85,7 @@ const component: WidgetPackage = {
   component: new WidgetPieIntervalComponent(),
   params: REQUEST_PARAMS,
   size: {
-    'sm': {'x': 0, 'y': 0, 'w': 3, 'h': 6},
+    'sm': {'x': 0, 'y': 0, 'w': 3, 'h': 7},
     'lg': {'x': 0, 'y': 0, 'w': 5, 'h': 7},
     'mobile': {'x': 0, 'y': 0, 'w': 2, 'h': 7}
   },

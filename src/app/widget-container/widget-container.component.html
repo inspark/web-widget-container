@@ -1,2 +1,4 @@
-<ng-container *ngComponentOutlet="dynamicComponent;
+<div *ngIf="dynamicComponent">
+    <ng-container *ngComponentOutlet="dynamicComponent;
                             ngModuleFactory: dynamicModule;"></ng-container>
+</div>

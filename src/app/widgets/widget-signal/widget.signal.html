@@ -23,41 +23,59 @@
 
     <tr *ngFor="let param of values.signal.items">
       <td>
-        <div>
+        <div *ngIf="!param.device?.controller?.isOnline && !param.data?.locked && !!param.device?.state?.id">
+          <span>{{'Not allowed' | translate}}</span>
+        </div>
+        <div *ngIf="!param.data?.locked && !param.device?.state?.id">
+          <span>{{'Not worked' | translate}}</span>
+        </div>
+
+
+
+        <div *ngIf="param.device?.controller?.isOnline && !param.data?.locked && !!param.device?.state?.id">
           <label class="c-checkbox c-checkbox_switch">
             <div class="c-checkbox__label u-vertical-align-middle u-text_center">
-              <div>{{'Off' | translate}}.</div>
+              <div *ngIf="!param.icons">{{'Off' | translate}}.</div>
+              <div *ngIf="param.icons" class="c-icon c-icon_svg c-icon_svg-large u-text_center"
+                   [inlineSVG]="param.icons?.error"
+              ></div>
             </div>
+
             <input type="checkbox" [checked]="param.value" class="c-checkbox__input"
-                   (click)="paramSave(param)"
-                   (change)="param.value = param.value ? 0 : 1"
+                   (click)="paramSave(component.paramUpdate(param))"
             >
             <i class="c-checkbox__icon u-margin-left-tiny u-vertical-align-baseline"></i>
             <div class="c-checkbox__label u-vertical-align-middle u-text_center">
-              <div>{{'On' | translate}}.</div>
+              <div *ngIf="!param.icons">{{'On' | translate}}.</div>
+              <div *ngIf="param.icons" class="c-icon c-icon_svg c-icon_svg-large u-text_center"
+                   [inlineSVG]="param.icons?.success"
+              ></div>
             </div>
           </label>
         </div>
-        <div [hidden]="!(param.data && param.data.locked)">
+        <div [hidden]="!(param.data && param.data?.locked)">
           {{'Locked' | translate}}
         </div>
 
       </td>
       <td>
         <div class="">{{param.title}}</div>
-        <div class="u-margin-bottom-tiny">{{param.device.object.shortname}}</div>
+        <div class="u-margin-bottom-tiny">{{param.device?.object?.shortname}}</div>
         <div class="u-margin-bottom-tiny">{{param.zone}}</div>
       </td>
       <td>{{(param.data?.manually && 'Manually' || 'Scheduled') | translate}}</td>
       <td class="u-position-relative">
         <div>
-          {{param.data && param.data.date | date:"dd.MM.yyyy HH:mm"}}
+          {{param.data && param.data?.date | date:"dd.MM.yyyy HH:mm"}}
         </div>
       </td>
       <td class="u-text_center">
-        <div *ngIf="param.data && param.data.manually !== undefined">
-          <label class="c-checkbox c-checkbox_compact">
-          {{param.data.manually ? 'On' : 'Off'}}
+        <div *ngIf="param.data && param.data?.manually !== undefined">
+          <label class="c-checkbox c-checkbox_switch">
+            <input type="checkbox" [checked]="!!param.data?.manually" class="c-checkbox__input"
+                   (click)="setManual(param, !param.data?.manually)"
+            />
+            <i class="c-checkbox__icon u-margin-left-tiny u-vertical-align-baseline"></i>
           </label>
         </div>
       </td>

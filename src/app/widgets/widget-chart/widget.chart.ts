@@ -7,7 +7,7 @@ import {
   WidgetComponent,
   WidgetComponentContainer,
   Component
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 interface ChartInputParameters {
   charts: {
@@ -34,7 +34,7 @@ class WidgetChartComponent extends WidgetComponent {
   data: any[] = [];
 
   onUpdate(values: ChartInputParameters) {
-
+    this.data = [];
     if (values.charts) {
       this.config = values.charts.config;
       values.charts.items.forEach((val, ind) => {

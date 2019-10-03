@@ -5,7 +5,7 @@ import {
   ITEM_TYPE, ItemSingle, PARAM_TYPE, ParamConfigSingle,
   WidgetParams,
   Component, WidgetComponentContainer
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 interface InputParameters {
   signal: {
@@ -32,6 +32,11 @@ class WidgetSignal extends WidgetComponent {
 
   toggleManualMode(data) {
     data.manually = !data.manually;
+  }
+
+  paramUpdate(param) {
+    param.value = param.value ? 0 : 1;
+    return param;
   }
 }
 

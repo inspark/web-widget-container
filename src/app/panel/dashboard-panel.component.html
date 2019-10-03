@@ -1,8 +1,9 @@
 <app-dashboard-controls>
     <ng-container>
 
+        <div class="controls">
         <div>
-            Current size: <input value="{{position | json}}" [readOnly]="true" />
+            Current size: <input value="{{position | json}}" [readOnly]="true"/>
         </div>
 
         <p-selectButton styleClass="button" [options]="langs" [(ngModel)]="currentLang"
@@ -11,31 +12,39 @@
         <p-selectButton styleClass="button" [options]="sizes" [(ngModel)]="viewMode"
                         (onChange)="changeSize()"></p-selectButton>
 
-        <app-widget-options [params]="params"></app-widget-options>
+            <p-selectButton styleClass="button" [options]="themes" [(ngModel)]="currentTheme"
+                            (onChange)="changeTheme()"></p-selectButton>
 
+        </div>
     </ng-container>
 </app-dashboard-controls>
-<div class="dashboard-container">
-    <div class="gridster-panel"
-         [ngStyle]="{'width': MODE_SIZES[viewMode].width, 'height': MODE_SIZES[viewMode].height, 'position': 'relative'}">
-        <ngx-gridster [options]="gridsterOptions" #gridster [draggableOptions]="{ handlerClass: 'c-panel__heading' }">
-            <ngx-gridster-item
-                    [(x)]="position.mobile.x" [(y)]="position.mobile.y"
-                    [(xSm)]="position.sm.x" [(ySm)]="position.sm.y"
-                    [(xLg)]="position.lg.x" [(yLg)]="position.lg.y"
-                    [(w)]="position.mobile.w" [(h)]="position.mobile.h"
-                    [(wSm)]="position.sm.w" [(hSm)]="position.sm.h"
-                    [(wLg)]="position.lg.w" [(hLg)]="position.lg.h"
-                    [dragAndDrop]="true"
-                    (reflow)="onReflow()"
-                    (change)="itemChange($event)"
-            >
-                <div class="c-panel c-panel_lighter widget-block">
-                    <div class="widget-container">
-                        <app-widget-container [widget]="widget" [params]="params"></app-widget-container>
+<div class="dashboard-wrapper">
+    <div class="dashboard-container">
+        <div class="gridster-panel"
+             [ngStyle]="{'width': MODE_SIZES[viewMode].width, 'height': MODE_SIZES[viewMode].height, 'position': 'relative'}">
+            <ngx-gridster [options]="gridsterOptions" #gridster
+                          [draggableOptions]="{ handlerClass: 'c-panel__heading' }">
+                <ngx-gridster-item
+                        [(x)]="position.mobile.x" [(y)]="position.mobile.y"
+                        [(xSm)]="position.sm.x" [(ySm)]="position.sm.y"
+                        [(xLg)]="position.lg.x" [(yLg)]="position.lg.y"
+                        [(w)]="position.mobile.w" [(h)]="position.mobile.h"
+                        [(wSm)]="position.sm.w" [(hSm)]="position.sm.h"
+                        [(wLg)]="position.lg.w" [(hLg)]="position.lg.h"
+                        [dragAndDrop]="true"
+                        (reflow)="onReflow()"
+                        (change)="itemChange($event)"
+                >
+                    <div class="c-panel c-panel_lighter c-panel_widget-block widget-block">
+                        <div class="widget-container" *ngIf="widget">
+                            <app-widget-container [widget]="widget" [params]="params"></app-widget-container>
+                        </div>
                     </div>
-                </div>
-            </ngx-gridster-item>
-        </ngx-gridster>
+                </ngx-gridster-item>
+            </ngx-gridster>
+        </div>
+    </div>
+    <div class="dashboard-options">
+        <app-widget-options></app-widget-options>
     </div>
 </div>

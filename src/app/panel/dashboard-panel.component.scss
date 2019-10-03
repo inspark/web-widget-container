@@ -4,6 +4,16 @@
   bottom: 16px;
 }
 
+.controls {
+  width: 100%;
+  display: flex;
+
+  & > * {
+    margin-left: 5px;
+    white-space: nowrap;
+  }
+}
+
 .widget-container {
   position: absolute;
   left: 0;
@@ -28,13 +38,25 @@
   position: relative;
 }
 
+.dashboard-wrapper {
+  display: flex;
+  width: 100vw;
+}
+
+.dashboard-options {
+  width: 300px;
+  background: var(--ids-theme-form-background);
+  padding: 8px;
+}
+
 .dashboard-container {
-  max-width: 100%;
+
+  width: calc(100vw - 300px);
   overflow: auto;
   background: var(--input-background);
 }
 
-.app-dashboard-controls > *{
+.app-dashboard-controls > * {
   margin-left: 8px;
 }
 

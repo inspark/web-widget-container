@@ -1,17 +1,159 @@
-<form (submit)="generate()">
-  <div *ngFor="let item of config;">
-    <div>Element: {{item.name}} </div>
-    <div *ngIf="item.itemType === ITEM_TYPE.series">
-      Type of chart:
-      <select name="chartype" [(ngModel)]="item.config.charttype">
-        <option value="lineChart">lineChart</option>
-        <option value="candlestickBarChart">candlestickBarChart</option>
-        <option value="stackedAreaChart">stackedAreaChart</option>
-        <option value="histogramChart">histogramChart</option>
-      </select>
+<form (submit)="generateClick($event)">
+    <div>
+        <select [(ngModel)]="selectedWidget" name="widget" (change)="changeWidget()">
+            <option *ngFor="let widget of widgets" [ngValue]="widget">{{widget.name}}</option>
+        </select>
     </div>
-  </div>
-  <button >Generate</button>
+
+    <div class="option-field">
+        <label>pictureId:</label>
+        <input type="checkbox" (change)="onChange()" name="editable" [(ngModel)]="generateConfig.pictureId">
+    </div>
+
+    <fieldset *ngFor="let item of config;">
+        <legend>Element: {{item.name}} </legend>
+
+        <ng-container *ngIf="item.itemType === ITEM_TYPE.custom">
+            <ng-container
+                    *ngTemplateOutlet="singleOptions;context:{item:item}">
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="item.itemType === ITEM_TYPE.single || item.itemType === ITEM_TYPE.interval">
+            <ng-container
+                    *ngTemplateOutlet="singleOptions;context:{item:item}">
+            </ng-container>
+        </ng-container>
+
+        <div class="option-field">
+            <div *ngIf="item.itemType === ITEM_TYPE.table">
+
+                <div class="option-field">
+                    <label>Param:</label>
+                    <input type="checkbox" (change)="onChange()" name="param" [(ngModel)]="item.generateConfig.param">
+                </div>
+                <div class="option-field">
+                    <label>Data:</label>
+                    <input type="checkbox" (change)="onChange()" name="data" [(ngModel)]="item.generateConfig.data">
+                </div>
+
+                <div class="option-field">
+                    <label>Show columns title:</label>
+                    <input type="checkbox" (change)="onChange()" name="visibleColumns"
+                           [(ngModel)]="item.generateConfig.visibleCol">
+                </div>
+                <div class="option-field">
+                    <label>Show rows title:</label>
+                    <input type="checkbox" (change)="onChange()" name="visibleRows"
+                           [(ngModel)]="item.generateConfig.visibleRow">
+                </div>
+
+                <div class="option-field">
+                    <label>Count rows:</label>
+                    <input type="number" (change)="onChange()" name="rows" step="1" min="1" max="10"
+                           [(ngModel)]="item.generateConfig.rows">
+                </div>
+                <div class="option-field">
+                    <label>Count cols:</label>
+                    <input type="number" (change)="onChange()" name="columns" step="1" min="1" max="10"
+                           [(ngModel)]="item.generateConfig.columns">
+                </div>
+                <label>For all data:</label>
+                <ng-container
+                        *ngTemplateOutlet="singleOptionsItem;context:{item: item, config:item.generateConfig, ind: 0}">
+                </ng-container>
+            </div>
+
+            <div *ngIf="item.itemType === ITEM_TYPE.series">
+                <label>Type of chart:</label>
+                <select (change)="onChange()" name="chartype" [(ngModel)]="item.config.charttype">
+                    <option value="lineChart">lineChart</option>
+                    <option value="candlestickBarChart">candlestickBarChart</option>
+                    <option value="stackedAreaChart">stackedAreaChart</option>
+                    <option value="histogramChart">histogramChart</option>
+                </select>
+            </div>
+
+        </div>
+
+    </fieldset>
+    <button>Generate</button>
 </form>
 
 
+<ng-template #singleOptions let-item="item">
+    <ng-container *ngIf="item.isArray">
+        <div class="option-field">
+            <label>Count elements:</label>
+            <input type="number" name="count" step="1" min="1" max="10" (change)="countChange(item)"
+                   [(ngModel)]="item.generateConfig.count">
+        </div>
+        <fieldset class="option-block" *ngFor="let element of item.generateConfig.items; let i = index">
+            <legend>Item  {{i + 1}}:</legend>
+            <ng-container
+                    *ngTemplateOutlet="singleOptionsItem;context:{item: element, config:element, ind: i}">
+            </ng-container>
+        </fieldset>
+    </ng-container>
+    <ng-container *ngIf="!item.isArray && item.items">
+        <div class="option-block" *ngFor="let element of item.items; let i = index">
+            <label>Item  {{element.name}}:</label>
+            <ng-container
+                    *ngTemplateOutlet="singleOptionsItem;context:{item: element, config:element.generateConfig, ind: i}">
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-template>
+
+
+<ng-template #singleOptionsItem let-item="item" let-config="config" let-ind="ind">
+    <div class="option-field">
+        <label>State:</label>
+        <select (change)="onChange()" name="state{{ind}}" [(ngModel)]="config.state">
+            <option value="null">No select</option>
+            <option value="-1">False value</option>
+            <option value="0">None</option>
+            <option value="1">Succsee</option>
+            <option value="2">Warning</option>
+            <option value="3">Error</option>
+        </select>
+    </div>
+    <div class="option-field">
+        <label>PageLink:</label>
+        <input type="checkbox" (change)="onChange()" name="PageLink{{ind}}" [(ngModel)]="config.pageLink">
+    </div>
+    <div class="option-field">
+        <label>Online:</label>
+        <input type="checkbox" (change)="onChange()" name="isOnline{{ind}}" [(ngModel)]="config.isOnline">
+    </div>
+    <div class="option-field">
+        <label>Device working:</label>
+        <input type="checkbox" (change)="onChange()" name="isWorkingDevice{{ind}}" [(ngModel)]="config.isWorkingDevice">
+    </div>
+    <div class="option-field">
+        <label>Icon:</label>
+        <input type="checkbox" (change)="onChange()" name="icon{{ind}}" [(ngModel)]="config.isIcon">
+    </div>
+    <div class="option-field">
+        <label>Icon set:</label>
+        <input type="checkbox" (change)="onChange()" name="icon{{ind}}" [(ngModel)]="config.iconSet">
+    </div>
+    <div class="option-field">
+        <label>Borders:</label>
+        <input type="checkbox" (change)="onChange()" name="borders{{ind}}" [(ngModel)]="config.borders">
+    </div>
+    <div class="option-field">
+        <label>Editable:</label>
+        <input type="checkbox" (change)="onChange()" name="editable{{ind}}" [(ngModel)]="config.editable">
+    </div>
+    <div class="option-field">
+        <label>Data:</label>
+        <input type="checkbox" (change)="onChange()" name="data{{ind}}" [(ngModel)]="config.data">
+    </div>
+    <div class="option-field" *ngIf="item.views">
+        <label>View:</label>
+        <select (change)="onChange()" name="view{{ind}}" [(ngModel)]="config.view">
+            <option *ngFor="let view  of item.views" [value]="view">{{view}}</option>
+        </select>
+    </div>
+</ng-template>

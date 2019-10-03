@@ -1,14 +1,12 @@
-import {Component, OnInit, NgModule, Input, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, NgModule, Input, ViewChild, ChangeDetectorRef, OnDestroy, Compiler} from '@angular/core';
 import {WidgetContainerComponent} from '../widget-container/widget-container.component';
 
-import {WidgetParams, WidgetSize, WidgetPackage} from '@inspark/widget-common';
+import {WidgetParams, WidgetSize, WidgetPackage, CommunicationService} from '@inspark/widget-common';
 import {GridsterComponent} from '@blare/angular2gridster';
 import {VIEW_SIZE} from './controls/controls.component';
 import {TranslateService} from '@ngx-translate/core';
 
-import WidgetComponent from '../widgets/widget-signal/widget.signal';
-
-
+import {Observable} from 'rxjs';
 
 
 const SIZES = {
@@ -39,34 +37,19 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
     {label: 'en', value: 'en'},
   ];
 
+  themes = [
+    {label: 'Light', value: 'light'},
+    {label: 'Dark', value: 'dark'},
+  ];
+
+
   params: WidgetParams;
   widget: WidgetPackage;
   viewMode: VIEW_SIZE = VIEW_SIZE.free;
   position: WidgetSize = {sm: {x: 0, y: 0, w: 2, h: 5}, lg: {x: 0, y: 0, w: 4, h: 5}, mobile: {x: 0, y: 0, w: 6, h: 5}};
 
-  currentLang;
-
-  constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang('en');
-
-    const browserLang = translate.getBrowserLang();
-    this.currentLang = browserLang.match(/en|fr/) ? browserLang : 'en';
-    translate.use(this.currentLang);
-
-
-    this.position = WidgetComponent.size;
-    this.params = WidgetComponent.params;
-    this.widget = WidgetComponent;
-    this.loadLocales(WidgetComponent);
-
-  }
-
-
+  private message$: Observable<any>;
   MODE_SIZES = SIZES;
-
-
-  @ViewChild(GridsterComponent) gridster: GridsterComponent;
 
   gridsterOptions = {
     lanes: 2, // how many lines (grid cells) dashboard has
@@ -97,6 +80,38 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
     ]
   };
 
+  currentTheme = 'dark';
+  currentLang;
+
+  constructor(public translate: TranslateService, private communication: CommunicationService) {
+    this.communication.create(0);
+
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    this.currentLang = browserLang.match(/en|fr/) ? browserLang : 'en';
+    translate.use(this.currentLang);
+
+    this.message$ = communication.message$[0];
+    this.message$.subscribe(this.getMessage.bind(this));
+  }
+
+  getMessage(data) {
+    console.log('getMessage', data);
+    if (data.command === 'values') {
+      const WidgetComponent = data.widget.package;
+      this.params = WidgetComponent.params;
+      this.position = WidgetComponent.size;
+      this.widget = WidgetComponent;
+      this.loadLocales(WidgetComponent);
+    }
+  }
+
+
+  @ViewChild(GridsterComponent) gridster: GridsterComponent;
+
+
   ngOnInit() {
 
   }
@@ -116,6 +131,16 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
 
   itemChange(event) {
     if (event.changes && event.changes.length !== 4) {
+      window.dispatchEvent(new Event('resize'));
+    }
+  }
+
+  changeTheme() {
+
+    if (this.currentTheme === 'light') {
+      document.body.classList.add('theme-light');
+    } else {
+      document.body.classList.remove('theme-light');
     }
   }
 

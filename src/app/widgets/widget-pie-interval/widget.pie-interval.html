@@ -1,16 +1,15 @@
-<div class="c-panel__body">
-  <div *ngIf="component.intervalDates?.endInterval && component.intervalDates?.beginInterval "
-       style="clear: both;display: block;width:100%;">
+<div *ngIf="component.intervalDates?.endInterval && component.intervalDates?.beginInterval "
+     style="clear: both;display: block;width:100%;">
     {{component.intervalDates.beginInterval | date:"dd-MM-yyyy"}}
     <span *ngIf="component.intervalDates.endInterval - component.intervalDates.beginInterval > 3600 * 24 * 1000">
       - {{component.intervalDates.endInterval | date:"dd-MM-yyyy"}}
     </span>
-  </div>
-  <div class="o-flex o-grid__cell_width-100 o-grid_center" style="height: 100%;">
+</div>
+<div class="o-flex o-grid__cell_width-100 o-grid_center">
     <app-pie-chart class="chart"
+                   [noDataMessage]="'noData' | translate"
                    [values]="component.data"
                    [config]="component.configs"
                    style="width: 100%; height: 100%;">
     </app-pie-chart>
-  </div>
 </div>

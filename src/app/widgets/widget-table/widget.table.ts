@@ -6,11 +6,11 @@ import {
   Component,
   ItemTable,
   WidgetComponentContainer
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 
 interface TableInputParameters {
-  item: ItemTable
+  item: ItemTable;
 }
 
 
@@ -36,7 +36,7 @@ const REQUEST_PARAMS: WidgetParams = {
   item: {
     title: '',
     item_type: ITEM_TYPE.table,
-    views: ['icon', 'icon & number'],
+    views: ['icon & number', 'icon'],
   }
 };
 
@@ -53,11 +53,7 @@ const component: WidgetPackage = {
   template: require('./widget.table.html'),
   component: new WidgetTableComponent(),
   params: REQUEST_PARAMS,
-  size: {
-    'sm': {'x': 0, 'y': 0, 'w': 3, 'h': 6},
-    'lg': {'x': 0, 'y': 0, 'w': 5, 'h': 7},
-    'mobile': {'x': 0, 'y': 0, 'w': 2, 'h': 7}
-  },
+  size: {'sm': {'x': 0, 'y': 0, 'w': 6, 'h': 6}, 'lg': {'x': 0, 'y': 0, 'w': 5, 'h': 7}, 'mobile': {'x': 0, 'y': 0, 'w': 2, 'h': 7}},
   needPicture: true,
   styles: require('./widget.table.scss'),
 };

@@ -9,5 +9,8 @@
   "Off": "Off",
   "On": "On",
   "Manually": "Manually",
-  "Scheduled": "Scheduled"
+  "Scheduled": "Scheduled",
+  "Not allowed": "Not allowed",
+  "Locked": "Locked",
+  "Not worked": "Not worked"
 }

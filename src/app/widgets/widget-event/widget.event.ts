@@ -7,7 +7,7 @@ import {
   WidgetParams,
   WidgetComponentContainer,
   Component,
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 interface EventParameters {
   events: EventValues;
@@ -28,31 +28,33 @@ class WidgetEventComponent extends WidgetComponent {
 
   onUpdate(values: EventParameters) {
 
-    values.events.data.rowList = values.events.data.rowList.map(event => {
-      values.events.config.attrList.forEach(attrname => {
+    if (values.events) {
+      values.events.data.rowList = values.events.data.rowList.map((event: any) => {
+        values.events.config.attrList.forEach(attrname => {
 
-        let date;
-        if (attrname === 'timestmp') {
-          date = new Date(event[attrname]);
-          event[attrname] = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-            ('0' + date.getDate()).slice(-2) + ' ' + ('0' + (date.getHours())).slice(-2) + ':' +
-            ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
-        } else if (event[attrname] && (attrname === 'resulttime' || attrname === 'senttime')) {
-          date = new Date(event[attrname]);
-          event[attrname] = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-            ('0' + date.getDate()).slice(-2) + ' ' + ('0' + (date.getHours())).slice(-2) + ':' +
-            ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
-        } else if (event[attrname] && attrname === 'state') {
-          event[attrname] = event[attrname].name;
+          let date;
+          if (attrname === 'timestmp') {
+            date = new Date(event[attrname]);
+            event[attrname] = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + date.getDate()).slice(-2) + ' ' + ('0' + (date.getHours())).slice(-2) + ':' +
+              ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+          } else if (event[attrname] && (attrname === 'resulttime' || attrname === 'senttime')) {
+            date = new Date(event[attrname]);
+            event[attrname] = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + date.getDate()).slice(-2) + ' ' + ('0' + (date.getHours())).slice(-2) + ':' +
+              ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+          } else if (event[attrname] && attrname === 'state') {
+            event[attrname] = event[attrname].name;
 
-        } else if (event[attrname]) {
-        } else {
-        }
+          } else if (event[attrname]) {
+          } else {
+          }
 
+        });
+
+        return event;
       });
-
-      return event;
-    });
+    }
   }
 }
 

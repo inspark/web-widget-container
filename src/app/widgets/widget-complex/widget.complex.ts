@@ -9,7 +9,7 @@ import {
   WidgetComponent,
   WidgetComponentContainer,
   Component,
-} from '@inspark/widget-common';
+} from '@inspark/widget-common/interface';
 
 
 interface InputParameters {

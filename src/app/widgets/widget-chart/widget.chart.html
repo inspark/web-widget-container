@@ -1,4 +1,4 @@
-<div class="c-panel__body" *ngIf="component.config">
+<div class="c-panel__body" *ngIf="component.config && values.charts">
     <div *ngIf="component.config.charttype === CHART_TYPES.candlestickBarChart">
         {{values.charts.items[0].title}}
     </div>
@@ -8,7 +8,7 @@
         <!--{{$ctrl.average[$index]}}-->
     </div>
     <div class="o-flex o-grid__cell_width-100 o-grid_center">
-        <app-chart class="chart" [values]="component.data" [config]="component.config"></app-chart>
+        <app-chart class="chart" [values]="component.data" [noDataMessage]="'No data for the period' | translate" [config]="component.config"></app-chart>
     </div>
     <div *ngFor="let item of values.charts.items">
         <a *ngIf="item.dashboardLink" [href]="'#!/main/dashboard/' + item.dashboardLink.id">{{item.dashboardLink.dashname}}
