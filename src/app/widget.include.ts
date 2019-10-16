@@ -5,6 +5,7 @@ import WidgetPieInterval from './widgets/widget-pie-interval/widget.pie-interval
 import WidgetTable from './widgets/widget-table/widget.table';
 import WidgetComplex from './widgets/widget-complex/widget.complex';
 import WidgetText from './widgets/widget-text/widget.text';
+import WidgetInfo from './widgets/widget-info-board/widget.info-board';
 import {WidgetPackage} from '@inspark/widget-common';
 
 
@@ -36,5 +37,6 @@ export const widgetLibrary = new WidgetLibrary([
   {name: 'WidgetTable', package: WidgetTable},
   {name: 'WidgetComplex', package: WidgetComplex},
   {name: 'WidgetText', package: WidgetText},
+  {name: 'WidgetInfo', package: WidgetInfo},
 ] as LibraryWidget[]);
 

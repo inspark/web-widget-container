@@ -6,5 +6,5 @@ if [ -z "$1" ]
     exit
 fi
 
-node ./node_modules/@biesbjerg/ngx-translate-extract/bin/cli.js  --clean --sort --format namespaced-json  --marker=_ --input ./src/app/widget-$NAME/ --output ./src/app/widget-$NAME/i18n/{ru,en}.json
+node ./node_modules/@biesbjerg/ngx-translate-extract/bin/cli.js  --clean --sort --format namespaced-json  --marker=_ --input ./src/app/widgets/widget-$NAME/ --output ./src/app/widgets/widget-$NAME/i18n/{ru,en}.json
 
