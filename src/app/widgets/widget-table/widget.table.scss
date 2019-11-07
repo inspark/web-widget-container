@@ -1,6 +1,7 @@
 .image {
   width: 100%;
-  max-height: 100px;
+  height: 100px;
+  margin-bottom: 12px;
 }
 
 .o-grid__cell {
@@ -10,4 +11,26 @@
 
 .c-icon {
   width: 30px;
+}
+
+
+.link-to-dashboard {
+  display: inline-flex;
+  cursor: pointer;
+  color: inherit;
+}
+
+.link-to-dashboard span {
+  text-decoration: underline;
+
+}
+
+.nonClickable span {
+  text-decoration: none;
+}
+
+
+.nonClickable {
+  cursor: default;
+  pointer-events: none;
 }

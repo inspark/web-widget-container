@@ -1,16 +1,13 @@
 {
-  "Switch state": "Состояние переключателя",
-  "Title": "Заголовок",
-  "Object name": "Имя объекта",
-  "Zone": "Зона",
-  "Control mode": "Режим управления",
-  "Last switching": "Последнее переключение",
-  "Manual mode": "Ручной режим",
-  "Off": "Выкл",
-  "On": "Вкл",
-  "Manually": "Ручной",
-  "Scheduled": "По расписанию",
-  "Not allowed": "Не доступен",
-  "Locked": "Заблокирован",
-  "Not worked": "Не работоспособен"
+	"Control mode": "Режим управления",
+	"Controller is not available": "Контроллер недоступен",
+	"Last switching": "Последнее переключение",
+	"Locked": "Заблокирован",
+	"Manual mode": "Ручной режим",
+	"Not allowed": "Недоступен",
+	"Not worked": "Неработоспособен",
+	"Off": "Выкл",
+	"On": "Вкл",
+	"Switch state": "Состояние переключателя",
+	"Title": "Заголовок"
 }

@@ -1,13 +1,12 @@
-import {Component, OnInit, NgModule, Input, ViewChild, ChangeDetectorRef, OnDestroy, Compiler} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WidgetContainerComponent} from '../widget-container/widget-container.component';
 
-import {WidgetParams, WidgetSize, WidgetPackage, CommunicationService} from '@inspark/widget-common';
+import {CommunicationService, WidgetPackage, WidgetParams, WidgetSize} from '@inspark/widget-common';
 import {GridsterComponent} from '@blare/angular2gridster';
 import {VIEW_SIZE} from './controls/controls.component';
 import {TranslateService} from '@ngx-translate/core';
-
 import {Observable} from 'rxjs';
-
+import _ from 'lodash';
 
 const SIZES = {
   0: {width: '375px', height: 'auto'},
@@ -21,6 +20,7 @@ const SIZES = {
   selector: 'app-dashboard-panel',
   templateUrl: './dashboard-panel.component.html',
   styleUrls: ['./dashboard-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   entryComponents: [WidgetContainerComponent],
 })
 export class DashboardPanelComponent implements OnInit, OnDestroy {
@@ -83,14 +83,14 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
   currentTheme = 'dark';
   currentLang;
 
-  constructor(public translate: TranslateService, private communication: CommunicationService) {
+  constructor(public translate: TranslateService, private communication: CommunicationService, private _elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
     this.communication.create(0);
 
-    translate.addLangs(['en', 'fr']);
+    translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    this.currentLang = browserLang.match(/en|fr/) ? browserLang : 'en';
+    this.currentLang = browserLang.match(/en|ru/) ? browserLang : 'en';
     translate.use(this.currentLang);
 
     this.message$ = communication.message$[0];
@@ -98,7 +98,6 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
   }
 
   getMessage(data) {
-    console.log('getMessage', data);
     if (data.command === 'values') {
       const WidgetComponent = data.widget.package;
       this.params = WidgetComponent.params;
@@ -111,27 +110,36 @@ export class DashboardPanelComponent implements OnInit, OnDestroy {
 
   @ViewChild(GridsterComponent) gridster: GridsterComponent;
 
+  resizeWidget() {
+    const container = (this._elementRef.nativeElement.querySelector('.widget-container') as HTMLElement);
+    if (container && container.offsetWidth && container.offsetHeight) {
+      this.widget.component.onResize(container.offsetWidth, container.offsetHeight);
+      this.cdRef.detectChanges();
+    }
+  }
 
   ngOnInit() {
-
+    window.addEventListener('resize', this.onResize);
   }
 
 
   ngOnDestroy() {
+    window.removeEventListener('resize', this.onResize);
   }
 
+  onResize = _.debounce(() => {
+    setTimeout(() => {
+      this.resizeWidget();
+    }, 100);
+  }, 500);
 
-  onReflow() {
-    this.adjustItemsSize();
+  onReady() {
+    this.resizeWidget();
   }
 
-  private adjustItemsSize() {
-  }
-
-
-  itemChange(event) {
-    if (event.changes && event.changes.length !== 4) {
-      window.dispatchEvent(new Event('resize'));
+  itemChange(widget: WidgetPackage, event) {
+    if (event.changes && (event.changes.indexOf('w') !== -1 || event.changes.indexOf('h') !== -1)) {
+      this.resizeWidget();
     }
   }
 

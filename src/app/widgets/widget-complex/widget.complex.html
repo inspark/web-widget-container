@@ -1,379 +1,380 @@
 <div class="c-panel__body ">
-    <div class="o-grid o-grid_wrap">
-        <div *ngIf="values.instant.items.length > 0"
-             class="o-grid_cell u-1/1 u-margin-bottom u-border-bottom-gray">
-            <div class="o-grid u-1/1">
-                <div class="o-grid__cell u-margin-bottom-none">
-                    <div class="c-list-group o-list-bare u-1/1 u-margin-top-small">
-                        <div *ngFor="let par of values.instant.items"
-                             class="o-grid o-grid_wrap u-margin-bottom-small u-border-bottom-gray u-padding-bottom-small">
+  <div class="o-grid o-grid_wrap">
+    <div *ngIf="values.instant.items.length > 0"
+         class="o-grid_cell u-1/1 u-margin-bottom u-border-bottom-gray">
+      <div class="o-grid u-1/1">
+        <div class="o-grid__cell u-margin-bottom-none">
+          <div class="c-list-group o-list-bare u-1/1 u-margin-top-small">
+            <div *ngFor="let par of values.instant.items"
+                 class="o-grid o-grid_wrap u-margin-bottom-small u-border-bottom-gray u-padding-bottom-small">
                 <span
-                        class="u-float-right text-muted u-h6">{{par.config.duration | periodFromDate : par.config.valueType}}</span>
+                  class="u-float-right text-muted u-h6">{{par.config.duration | periodFromDate : par.config.valueType}}</span>
 
-                            <ng-container
-                                    *ngIf="par.config.valueType != VALUE_TYPE.signal">
-                                <div *ngIf="par.data?.state?.idIcon"
-                                     class="o-grid__cell o-grid__cell_width-fixed u-text_center"
-                                     style="width: 70px">
-                                    <div *ngIf="par.data?.state?.idIcon"
-                                         [inlineSVG]="par.data?.state?.idIcon | makeIconUrl"
-                                         class="c-icon c-icon_svg c-icon_svg-large u-text_center"
-                                    >
-                                    </div>
-                                </div>
-                                <div class="o-grid__cell u-margin-bottom-tiny u-text_word-wrap_break-word">
-                                    <div [hidden]="!par.title" class="u-h3 u-text_primary">
-                                        {{par.title}}
-                                    </div>
-                                </div>
+              <ng-container
+                *ngIf="par.config.valueType != VALUE_TYPE.signal">
+                <div *ngIf="par.data?.state?.idIcon" class="o-grid__cell o-grid__cell_width-fixed u-text_center"
+                     style="width: 70px">
+                  <div *ngIf="par.data?.state?.idIcon" [inlineSVG]="par.data?.state?.idIcon | makeIconUrl"
+                       class="c-icon c-icon_svg c-icon_svg-large u-text_center"
+                  >
+                  </div>
+                </div>
+                <div class="o-grid__cell u-margin-bottom-tiny u-text_word-wrap_break-word">
+                  <div [hidden]="!par.title" class="u-h3 u-text_primary">
+                    {{par.title}}
+                  </div>
+                </div>
 
-                                <div class="o-flex o-grid__cell_width-100 o-grid_center">
-                                    <div
-                                            [ngClass]="'c-widget__block_status-' + (par.data && par.data?.state && par.data?.state?.color)"
-                                            aria-haspopup="true"
-                                            class="o-grid__cell u-1/1 c-widget__block c-widget__block_dashname-on-hover o-flex__item c-tooltip c-tooltip_bottom-left"
-                                            role="tooltip"
-                                            title="{{par.title}}">
-                                        <div class="c-widget-value c-widget-value_large"
-                                             ng-click="$ctrl.openWindow(par.url)">
+                <div class="o-flex o-grid__cell_width-100 o-grid_center">
+                  <div
+                    [ngClass]="'c-widget__block_status-' + (par.data && par.data?.state && par.data?.state?.color)"
+                    aria-haspopup="true"
+                    class="o-grid__cell u-1/1 c-widget__block c-widget__block_dashname-on-hover o-flex__item c-tooltip c-tooltip_bottom-left"
+                    role="tooltip"
+                    title="{{par.title}}">
+                    <div class="c-widget-value c-widget-value_large" ng-click="$ctrl.openWindow(par.url)">
                         <span
-                                [ngClass]="'c-widget-status_vertical-line-left-status-' + (par.data && par.data?.state && par.data?.state.color)"
-                                class="c-widget-status c-widget-status_vertical-line-left"></span>
-                                            <div class="u-text-truncate u-text_center u-display-inline-block">
+                          [ngClass]="'c-widget-status_vertical-line-left-status-' + (par.data && par.data?.state && par.data?.state.color)"
+                          class="c-widget-status c-widget-status_vertical-line-left"></span>
+                      <div class="u-text-truncate u-text_center u-display-inline-block">
                           <span *ngIf="!par.isEditing" class="c-text_widget-value-large"
                                 title="{{par.value}} {{par.device && par.device.param && par.device.param.measure && par.device.param.measure.unit}}">
                                 {{par.value}}
                           </span>
-                                                <div *ngIf="par.isEditing" class="c-widget-value c-widget-value_small">
-                                                    <div
-                                                            class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle "
-                                                            style="position: relative;">
-                                                        <input [(ngModel)]="par.value"
-                                                               class="c-input c-input_tiny c-input_block"
-                                                               onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
-                                                               required type="text">
-                                                        <div class="u-display-inline-flex">
-                                                            <button (click)="paramCancel(par)"
-                                                                    class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
-                                                                <i class="fa fa-close"></i>
-                                                            </button>
-                                                            <button
-                                                                    (click)="paramSave(par)"
-                                                                    class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary">
-                                                                <i class="fa fa-check"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span
-                                                    class="u-display-inline-block u-vertical-align-top">{{par.device && par.device.param && par.device.param.measure && par.device.param.measure.unit}}</span>
-                                            <div *ngIf="par.data && par.data.state && par.data.state.color == 'falsevalue'"
-                                                 class="u-text_base">Значение
-                                                не достоверно
-                                            </div>
-                                            <div *ngIf="par.dashboardLink && !par.isEditing"
-                                                 class="c-widget__block-dashname u-text_right u-text_nowrap u-position-absolute u-position-absolute-right-tiny u-position-absolute-bottom u-margin-bottom-none u-overflow-hidden u-text-overflow_ellipsis"
-                                                 style="width: calc(100% - 20px); bottom: 2px; right: 0;">
-                                                <a [href]="'#!/main/dashboard/' + par.dashboardLink.id">Перейти на
-                                                    {{par.dashboardLink.dashname}}</a>
-                                            </div>
-                                        </div>
-                                        <span
-                                                class="u-text_right ng-binding u-position-absolute u-position-absolute-right-tiny u-position-absolute-top"
-                                                style="top: -2px;">
+                        <div *ngIf="par.isEditing" class="c-widget-value c-widget-value_small">
+                          <div
+                            class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle "
+                            style="position: relative;">
+                            <input [(ngModel)]="par.value" class="c-input c-input_tiny c-input_block"
+                                   onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
+                                   required type="text">
+                            <div class="u-display-inline-flex">
+                              <button (click)="paramCancel(par)"
+                                      class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
+                                <i class="fa fa-close"></i>
+                              </button>
+                              <button
+                                (click)="paramSave(par)"
+                                class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary">
+                                <i class="fa fa-check"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <span
+                        class="u-display-inline-block u-vertical-align-top">{{par.device && par.device.param && par.device.param.measure && par.device.param.measure.unit}}</span>
+                      <div *ngIf="par.data && par.data.state && par.data.state.color == 'falsevalue'"
+                           class="u-text_base">Значение
+                        не достоверно
+                      </div>
+                      <div *ngIf="par.dashboardLink && !par.isEditing"
+                           class="c-widget__block-dashname u-text_right u-text_nowrap u-position-absolute u-position-absolute-right-tiny u-position-absolute-bottom u-margin-bottom-none u-overflow-hidden u-text-overflow_ellipsis"
+                           style="width: calc(100% - 20px); bottom: 2px; right: 0;">
+                        <a [href]="'#!/main/dashboard/' + par.dashboardLink">Перейти на связанный дашборд</a>
+                      </div>
+                    </div>
+                    <span
+                      class="u-text_right ng-binding u-position-absolute u-position-absolute-right-tiny u-position-absolute-top"
+                      style="top: -2px;">
                         {{par.data?.date | date:"HH:mm"}}
                       </span>
-                                    </div>
+                  </div>
 
-                                    <div class="u-margin-left-small">
-                                        <div *ngIf="par.data && par.canEditable">
-                                            <button (click)="paramEdit(par)"
-                                                    class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                        </div>
+                  <div class="u-margin-left-small">
+                    <div *ngIf="par.data && par.canEditable">
+                      <button (click)="paramEdit(par)"
+                              class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                    </div>
 
-                                        <div *ngIf="par.borders?.length > 0"
-                                             [container]="'body'"
-                                             [ngbTooltip]="statusRangesTemplate"
-                                             class="c-icon c-icon_svg c-icon_svg-middle"
-                                             placement="right">
-                                            <svg height="24" viewBox="0 0 24 24" width="24"
-                                                 xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <defs>
-                                                    <path
-                                                            d="M3,5 L3,6 L4,6 L4,5 L3,5 Z M5,5 L5,6 L7,6 L7,5 L5,5 Z M8,5 L8,6 L10,6 L10,5 L8,5 Z M9,5 L9,6 L11,6 L11,5 L9,5 Z M12,5 L12,6 L14,6 L14,5 L12,5 Z M13,5 L13,6 L15,6 L15,5 L13,5 Z M16,5 L16,6 L18,6 L18,5 L16,5 Z M17,5 L17,6 L19,6 L19,5 L17,5 Z M20,5 L20,6 L21,6 L21,5 L20,5 Z M18.2420263,7 C16.6196061,7 16.0370543,8.733073 15.4727955,10.40625 C15.2265478,11.138021 14.9929644,11.7864583 14.7298311,12.3333333 L8.96622889,12.3333333 C9.00140704,12.5078127 9.04502814,12.7369793 9.10131332,13 L14.3470919,13 C13.9249531,13.6289063 13.414165,14 12.6923077,14 C11.2429645,14 10.7265479,15.1132813 10.3846154,15.8541667 C10.1271106,16.4127603 9.98217654,16.6666667 9.81050657,16.6666667 C9.11819887,16.6666667 8.55112561,13.8815103 8.24577861,12.3854167 C7.69277683,9.67447933 7.21153837,7.33333333 5.48780488,7.33333333 C3.79502805,7.33333333 3.0956848,9.578125 3.02251407,9.83333333 L4.41838649,10.1666667 C4.59427758,9.55338533 5.10084419,8.66666667 5.48780488,8.66666667 C5.98030037,8.66666667 6.50797364,11.1119793 6.75984991,12.3333333 L3,12.3333333 L3,13 L6.90619137,13 C7.44512204,15.6184897 8.00797382,18 9.81050657,18 C10.9629457,18 11.3864916,17.0677083 11.7016886,16.3854167 C12.0703567,15.5846353 12.2631333,15.3333333 12.6923077,15.3333333 C15.3180114,15.3333333 16.1651032,12.8216147 16.8461538,10.8020833 C17.2359286,9.64583333 17.6791745,8.33333333 18.2420263,8.33333333 C19.2030958,8.33333333 19.5787994,10.0963543 19.5816135,10.1145833 L21,9.88541667 C20.8015948,8.8125 20.0009383,7 18.2420263,7 Z M17.265252,13 C17.1816975,13.3359375 17.0968169,13.667969 17,14 L21,14 L21,13 L17.265252,13 Z M3,19 L3,20 L4,20 L4,19 L3,19 Z M5,19 L5,20 L7,20 L7,19 L5,19 Z M8,19 L8,20 L10,20 L10,19 L8,19 Z M9,19 L9,20 L11,20 L11,19 L9,19 Z M12,19 L12,20 L14,20 L14,19 L12,19 Z M13,19 L13,20 L15,20 L15,19 L13,19 Z M16,19 L16,20 L18,20 L18,19 L16,19 Z M17,19 L17,20 L19,20 L19,19 L17,19 Z M20,19 L20,20 L21,20 L21,19 L20,19 Z"
-                                                            id="electricwire-a"/>
-                                                </defs>
-                                                <use xlink:href="#electricwire-a"/>
-                                            </svg>
-                                        </div>
-                                        <ng-template #statusRangesTemplate>
-                                            <p>{{'Parameter borders' | translate}}</p>
-                                            <p *ngFor="let border of par.borders"
-                                               class="u-text_center c-widget__block_status-{{border.state.color}} u-margin-bottom-tiny">
-                                                {{border.intervals[0].from}} .. {{border.intervals[0].to}}</p>
-                                        </ng-template>
+                    <div *ngIf="par.borders?.length > 0"
+                         [container]="'body'"
+                         [ngbTooltip]="statusRangesTemplate"
+                         class="c-icon c-icon_svg c-icon_svg-middle"
+                         placement="right">
+                      <svg height="24" viewBox="0 0 24 24" width="24"
+                           xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                          <path
+                            d="M3,5 L3,6 L4,6 L4,5 L3,5 Z M5,5 L5,6 L7,6 L7,5 L5,5 Z M8,5 L8,6 L10,6 L10,5 L8,5 Z M9,5 L9,6 L11,6 L11,5 L9,5 Z M12,5 L12,6 L14,6 L14,5 L12,5 Z M13,5 L13,6 L15,6 L15,5 L13,5 Z M16,5 L16,6 L18,6 L18,5 L16,5 Z M17,5 L17,6 L19,6 L19,5 L17,5 Z M20,5 L20,6 L21,6 L21,5 L20,5 Z M18.2420263,7 C16.6196061,7 16.0370543,8.733073 15.4727955,10.40625 C15.2265478,11.138021 14.9929644,11.7864583 14.7298311,12.3333333 L8.96622889,12.3333333 C9.00140704,12.5078127 9.04502814,12.7369793 9.10131332,13 L14.3470919,13 C13.9249531,13.6289063 13.414165,14 12.6923077,14 C11.2429645,14 10.7265479,15.1132813 10.3846154,15.8541667 C10.1271106,16.4127603 9.98217654,16.6666667 9.81050657,16.6666667 C9.11819887,16.6666667 8.55112561,13.8815103 8.24577861,12.3854167 C7.69277683,9.67447933 7.21153837,7.33333333 5.48780488,7.33333333 C3.79502805,7.33333333 3.0956848,9.578125 3.02251407,9.83333333 L4.41838649,10.1666667 C4.59427758,9.55338533 5.10084419,8.66666667 5.48780488,8.66666667 C5.98030037,8.66666667 6.50797364,11.1119793 6.75984991,12.3333333 L3,12.3333333 L3,13 L6.90619137,13 C7.44512204,15.6184897 8.00797382,18 9.81050657,18 C10.9629457,18 11.3864916,17.0677083 11.7016886,16.3854167 C12.0703567,15.5846353 12.2631333,15.3333333 12.6923077,15.3333333 C15.3180114,15.3333333 16.1651032,12.8216147 16.8461538,10.8020833 C17.2359286,9.64583333 17.6791745,8.33333333 18.2420263,8.33333333 C19.2030958,8.33333333 19.5787994,10.0963543 19.5816135,10.1145833 L21,9.88541667 C20.8015948,8.8125 20.0009383,7 18.2420263,7 Z M17.265252,13 C17.1816975,13.3359375 17.0968169,13.667969 17,14 L21,14 L21,13 L17.265252,13 Z M3,19 L3,20 L4,20 L4,19 L3,19 Z M5,19 L5,20 L7,20 L7,19 L5,19 Z M8,19 L8,20 L10,20 L10,19 L8,19 Z M9,19 L9,20 L11,20 L11,19 L9,19 Z M12,19 L12,20 L14,20 L14,19 L12,19 Z M13,19 L13,20 L15,20 L15,19 L13,19 Z M16,19 L16,20 L18,20 L18,19 L16,19 Z M17,19 L17,20 L19,20 L19,19 L17,19 Z M20,19 L20,20 L21,20 L21,19 L20,19 Z"
+                            id="electricwire-a"/>
+                        </defs>
+                        <use xlink:href="#electricwire-a"/>
+                      </svg>
+                    </div>
+                    <ng-template #statusRangesTemplate>
+                      <p>{{'Parameter borders' | translate}}</p>
+                      <p *ngFor="let border of par.borders"
+                         class="u-text_center c-widget__block_status-{{border.state.color}} u-margin-bottom-tiny">
+                        <span *ngIf="border.intervals">{{border.intervals[0].from}} .. {{border.intervals[0].to}}</span></p>
+                    </ng-template>
 
 
-                                        <a [href]="par.device?.param?.id | makeChartUrl:par.device?.param?.calc"
-                                           class="u-display-inline-block c-icon c-icon_svg c-icon_svg-middle"
-                                           target="_blank"
-                                        >
-                                            <svg height="24" viewBox="0 0 24 24" width="24"
-                                                 xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <defs>
-                                                    <path
-                                                            d="M9,17 L7,17 L7,10 L9,10 L9,17 Z M13,17 L11,17 L11,7 L13,7 L13,17 Z M17,17 L15,17 L15,13 L17,13 L17,17 Z"
-                                                            id="chart_bar_no_fill-a"/>
-                                                </defs>
-                                                <use xlink:href="#chart_bar_no_fill-a"/>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="par.config.valueType == VALUE_TYPE.signal">
-                                <div class="o-grid__cell o-grid__cell_width-fixed u-text_center "
-                                     style="width: 70px">
-                                    <div *ngIf="par.data"
-                                         [ngClass]="'c-widget-parameter-icon_status-' + par.data.state.color"
-                                         class="c-icon c-icon_svg c-icon_svg-large u-text_center"
-                                         ng-include="par.icon.url"
-                                         ng-show="par.icon"
-                                         ng-show="par.icon">
-                                    </div>
-                                </div>
-                                <div class="o-grid__cell">
-                                    <div *ngIf="par.title" class="u-h3 u-text_primary">
-                                        {{par.title}}
-                                    </div>
-                                    <div *ngIf="(par.device.object.shortname || par.device.controller.serialnumber)"
-                                         class="u-h4 u-text_word-wrap_break-word">
-                                        {{par.device.object.shortname}},&nbsp;{{par.device.controller.serialnumber}}
-                                    </div>
-                                </div>
-                                <div class="u-display-inline-block u-vertical-align-middle u-text_center"
-                                     style="width: 370px">
-                                    <div class="o-box o-box_small">
-                                        <div class="u-text_center">
-                                            <label
-                                                    class="c-checkbox c-checkbox_switch c-checkbox_switch-two-values c-checkbox_switch-on-off u-text_nowrap">
+                    <a [href]="par.device?.param?.id | makeChartUrl:par.device?.param?.calc"
+                       class="u-display-inline-block c-icon c-icon_svg c-icon_svg-middle"
+                       target="_blank"
+                    >
+                      <svg height="24" viewBox="0 0 24 24" width="24"
+                           xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                          <path
+                            d="M9,17 L7,17 L7,10 L9,10 L9,17 Z M13,17 L11,17 L11,7 L13,7 L13,17 Z M17,17 L15,17 L15,13 L17,13 L17,17 Z"
+                            id="chart_bar_no_fill-a"/>
+                        </defs>
+                        <use xlink:href="#chart_bar_no_fill-a"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="par.config.valueType == VALUE_TYPE.signal">
+                <div class="o-grid__cell o-grid__cell_width-fixed u-text_center "
+                     style="width: 70px">
+                  <div *ngIf="par.data"
+                       [ngClass]="'c-widget-parameter-icon_status-' + par.data.state.color"
+                       class="c-icon c-icon_svg c-icon_svg-large u-text_center"
+                       ng-include="par.icon.url"
+                       ng-show="par.icon"
+                       ng-show="par.icon">
+                  </div>
+                </div>
+                <div class="o-grid__cell">
+                  <div *ngIf="par.title" class="u-h3 u-text_primary">
+                    {{par.title}}
+                  </div>
+
+                  <div *ngIf="par.zone && !isCompact" class="u-h4 u-text_word-wrap_break-word">
+                    {{par.zone}}
+                  </div>
+                  <div *ngIf="!isCompact && (par.device.object.shortname || par.device.controller.serialnumber)"
+                       class="u-h4 u-text_word-wrap_break-word">
+                    {{par.device.object.shortname}},&nbsp;{{par.device.controller.serialnumber}}
+                  </div>
+
+                  <div *ngIf="par.switchCount" class="">
+                    Количество переключений:&nbsp;{{par.switchCount}}
+                  </div>
+                </div>
+                <div class="u-display-inline-block u-vertical-align-middle u-text_center"
+                     style="width: 370px">
+                  <div class="o-box o-box_small">
+                    <div class="u-text_center">
+                      <label
+                        class="c-checkbox c-checkbox_switch c-checkbox_switch-two-values c-checkbox_switch-on-off u-text_nowrap">
                                               <span class="c-checkbox__label u-vertical-align-middle">
                                                  <div ng-show="!par.iconOff">{{'Off' | translate}}</div>
                                                  <div
-                                                         alt="Выкл"
-                                                         class="c-icon c-icon_svg c-icon_svg-large u-text_center u-vertical-align-bottom"
-                                                         ng-include="par.iconOff.url"
-                                                         ng-show="par.iconOff"
-                                                         title="{{'Off' | translate}}"
+                                                   alt="Выкл"
+                                                   class="c-icon c-icon_svg c-icon_svg-large u-text_center u-vertical-align-bottom"
+                                                   ng-include="par.iconOff.url"
+                                                   ng-show="par.iconOff"
+                                                   title="{{'Off' | translate}}"
                                                  ></div>
                                                       </span>
 
-                                                <i class="fa fa-question u-margin-right u-margin-left u-fs-21 u-text_center"
-                                                   ng-show="par.state.id < 0"></i>
-                                                <input class="c-checkbox__input" ng-checked="par.switch"
-                                                       onclick="return false;"
-                                                       type="checkbox"/>
-                                                <i *ngIf="par.data.state.idIcon >= 0"
-                                                   class="c-checkbox__icon u-margin-left-tiny u-vertical-align-baseline"></i>
+                        <i class="fa fa-question u-margin-right u-margin-left u-fs-21 u-text_center"
+                           ng-show="par.state.id < 0"></i>
+                        <input class="c-checkbox__input" ng-checked="par.switch"
+                               onclick="return false;"
+                               type="checkbox"/>
+                        <i *ngIf="par.state.id >= 0"
+                           class="c-checkbox__icon u-margin-left-tiny u-vertical-align-baseline"></i>
 
-                                                <span class="c-checkbox__label u-vertical-align-middle">
+                        <span class="c-checkbox__label u-vertical-align-middle">
                                                     <div ng-show="!par.iconOn">{{'On' | translate}}</div>
                                                     <div
-                                                            alt="Вкл"
-                                                            class="c-icon c-icon_svg c-icon_svg-large u-text_center u-vertical-align-bottom"
-                                                            ng-include="par.iconOn.url"
-                                                            ng-show="par.iconOn"
-                                                            title="{{'On' | translate}}"
+                                                      alt="Вкл"
+                                                      class="c-icon c-icon_svg c-icon_svg-large u-text_center u-vertical-align-bottom"
+                                                      ng-include="par.iconOn.url"
+                                                      ng-show="par.iconOn"
+                                                      title="{{'On' | translate}}"
                                                     ></div>
                                                     </span>
-                                            </label>
-                                        </div>
-                                        <div class="u-lead u-text_center">
-                                            <span *ngIf="par.data.manually">{{'manually' | translate}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-                        </div>
+                      </label>
                     </div>
+                    <div class="u-lead u-text_center">
+                      {{par.manually | translate}}
+                    </div>
+                  </div>
                 </div>
+              </ng-container>
             </div>
+          </div>
         </div>
-        <div class="o-grid_cell u-1/1 u-margin-bottom u-border-bottom-gray">
+      </div>
+    </div>
+    <div class="o-grid_cell u-1/1 u-margin-bottom u-border-bottom-gray">
 
-            <div class="o-grid u-1/1">
-                <div *ngIf="values.interval.items.length > 0"
-                     class="o-grid__cell u-margin-bottom-none">
-                    <div class="c-list-group o-list-bare u-1/1 u-margin-bottom-tiny">
-                        <div *ngFor="let par of values.interval.items; let idx = index"
-                             class="o-grid o-grid_wrap u-margin-bottom-small u-border-bottom-gray">
+      <div class="o-grid u-1/1">
+        <div *ngIf="values.interval.items.length > 0"
+             class="o-grid__cell u-margin-bottom-none">
+          <div class="c-list-group o-list-bare u-1/1 u-margin-bottom-tiny">
+            <div *ngFor="let par of values.interval.items; let idx = index"
+                 class="o-grid o-grid_wrap u-margin-bottom-small u-border-bottom-gray">
                 <span
-                        class="u-float-right text-muted u-h6">{{par.config.duration | periodFromDate : par.config.valueType}}</span>
-                            <ng-container *ngIf="par.config.valueType == VALUE_TYPE.signal">
-                                <div *ngIf="par.data"
-                                     class="o-grid__cell o-grid__cell_width-fixed u-text_center"
-                                     style="width: 70px">
-                                    <div class="c-icon c-icon_svg c-icon_svg-large u-text_center"
-                                         ng-include="par.icon.url"
-                                         ng-show="par.icon"
-                                         ng-show="par.icon">
-                                    </div>
-                                </div>
-                                <div class="o-grid__cell">
-                                    <div *ngIf="par.title" class="u-h3 u-text_primary u-text_word-wrap_break-word">
-                                        {{par.title}}
-                                    </div>
-                                    <div *ngIf="(par.device.object.shortname || par.device.controller.serialnumber)"
-                                         class="u-h4 u-text_word-wrap_break-word">
-                                        {{par.device.object.shortname}},&nbsp;{{par.device.controller.serialnumber}}
-                                    </div>
+                  class="u-float-right text-muted u-h6">{{par.config.duration | periodFromDate : par.config.valueType}}</span>
+              <ng-container *ngIf="par.config.valueType == VALUE_TYPE.signal">
+                <div *ngIf="par.data"
+                     class="o-grid__cell o-grid__cell_width-fixed u-text_center"
+                     style="width: 70px">
+                  <div class="c-icon c-icon_svg c-icon_svg-large u-text_center"
+                       ng-include="par.icon.url"
+                       ng-show="par.icon"
+                       ng-show="par.icon">
+                  </div>
+                </div>
+                <div class="o-grid__cell">
+                  <div *ngIf="par.title" class="u-h3 u-text_primary u-text_word-wrap_break-word">
+                    {{par.title}}
+                  </div>
 
-                                    <div *ngIf="par.data.switchCount" class="">
-                                        Количество переключений:&nbsp;{{par.data.switchCount}}
-                                    </div>
-                                </div>
-                                <div class="o-grid__cell o-grid__cell_width-100 u-position-relative u-margin-top-small">
-                                    <div class="c-widgetValue c-widgetValue_large u-padding-left-none">
-                                        <div class="u-display-inline-block u-vertical-align-middle u-text_center"
-                                             style="width: 370px">
+                  <div *ngIf="par.zone && !isCompact" class="u-h4 u-text_word-wrap_break-word">
+                    {{par.zone}}
+                  </div>
+                  <div *ngIf="(par.device.object.shortname || par.device.controller.serialnumber) && !isCompact"
+                       class="u-h4 u-text_word-wrap_break-word">
+                    {{par.device.object.shortname}},&nbsp;{{par.device.controller.serialnumber}}
+                  </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="par.config.valueType != VALUE_TYPE.signal">
-                                <div *ngIf="par.data?.endInterval && par.data?.beginInterval "
-                                     class="o-grid__cell o-grid__cell_width-100 u-padding-tiny">{{par.data?.beginInterval | date:"dd-MM-yyyy"}}
-                                    <span
-                                            *ngIf="par.data?.endInterval - par.data?.beginInterval > 3600 * 24 * 1000">- {{par.data?.endInterval | date:"dd-MM-yyyy"}}</span>
-                                </div>
-                                <div *ngIf="par.data?.state?.idIcon"
-                                     class="o-grid__cell o-grid__cell_width-fixed u-text_center"
-                                     style="width: 70px">
-                                    <div [inlineSVG]="par.data?.state?.idIcon | makeIconUrl"
-                                         class="c-icon c-icon_svg c-icon_svg-large u-text_center"></div>
-                                </div>
+                  <div *ngIf="par.switchCount" class="">
+                    Количество переключений:&nbsp;{{par.switchCount}}
+                  </div>
+                </div>
+                <div class="o-grid__cell o-grid__cell_width-100 u-position-relative u-margin-top-small">
+                  <div class="c-widgetValue c-widgetValue_large u-padding-left-none">
+                    <div class="u-display-inline-block u-vertical-align-middle u-text_center"
+                         style="width: 370px">
 
-                                <div class="o-grid__cell">
-                                    <div *ngIf="par.title" class="u-h3 u-text_primary u-margin-bottom-tiny">
-                                        {{par.title}}
-                                    </div>
-                                </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="par.config.valueType != VALUE_TYPE.signal">
+                <div *ngIf="par.data?.endInterval && par.data?.beginInterval "
+                     class="o-grid__cell o-grid__cell_width-100 u-padding-tiny">{{par.data?.beginInterval | date:"dd-MM-yyyy"}}
+                  <span
+                    *ngIf="par.data?.endInterval - par.data?.beginInterval > 3600 * 24 * 1000">- {{par.data?.endInterval | date:"dd-MM-yyyy"}}</span>
+                </div>
+                <div *ngIf="par.data?.state?.idIcon" class="o-grid__cell o-grid__cell_width-fixed u-text_center"
+                     style="width: 70px">
+                  <div [inlineSVG]="par.data?.state?.idIcon | makeIconUrl"
+                       class="c-icon c-icon_svg c-icon_svg-large u-text_center"></div>
+                </div>
+
+                <div class="o-grid__cell">
+                  <div *ngIf="par.title" class="u-h3 u-text_primary u-margin-bottom-tiny">
+                    {{par.title}}
+                  </div>
+                </div>
 
 
-                                <!-- Old html -->
+                <!-- Old html -->
 
 
-                                <div class="o-flex o-grid__cell_width-100 o-grid_center">
-                                    <div class="o-grid__cell u-1/1 o-flex__item u-position-relative">
-                                        <div class="o-grid o-grid_wrap">
+                <div class="o-flex o-grid__cell_width-100 o-grid_center">
+                  <div class="o-grid__cell u-1/1 o-flex__item u-position-relative">
+                    <div class="o-grid o-grid_wrap">
 
-                                            <div
-                                                    class="o-grid__cell o-grid__cell_width-fixed u-centring-ver"
-                                                    style="width: 80px">
-                                                <div *ngIf="component.dataPie && component.dataPie.length && component.configs"
-                                                     class="u-text_center u-centring-ver">
-                                                    <app-pie-chart [config]="component.configs"
-                                                                   [values]="component.dataPie[idx]"
-                                                                   class="chart"></app-pie-chart>
+                      <div
+                        class="o-grid__cell o-grid__cell_width-fixed u-centring-ver" style="width: 80px">
+                        <div  *ngIf="component.dataPie && component.dataPie.length && component.configs"  class="u-text_center u-centring-ver">
+                          <app-pie-chart [config]="component.configs" [values]="component.dataPie[idx]"
+                                         class="chart"></app-pie-chart>
 
-                                                </div>
-                                            </div>
-                                            <div class="o-grid__cell">
-                                                <div class="c-widgetValue c-widgetValue_large u-padding-left-none">
-                                                    <!--<span ng-class="'c-widgetStatus c-widgetStatus_vertical-line-left c-widgetStatus_vertical-line-left-status-' + par.state.statecolor"></span>-->
+                        </div>
+                      </div>
+                      <div class="o-grid__cell">
+                        <div class="c-widgetValue c-widgetValue_large u-padding-left-none">
+                          <!--<span ng-class="'c-widgetStatus c-widgetStatus_vertical-line-left c-widgetStatus_vertical-line-left-status-' + par.state.statecolor"></span>-->
 
-                                                    <div *ngIf="par.data?.value !== null"
-                                                         class="u-text-truncate u-text_center u-display-inline-block">
+                          <div *ngIf="par.data?.value !== null"
+                               class="u-text-truncate u-text_center u-display-inline-block">
                   <span class="c-text_widget-value-large u-vertical-align-middle"
                         title="{{par.data?.value}} {{par.device.param.measure.unit}}">
                         {{par.data?.value}}
                   </span>
-                                                        <span
-                                                                class="u-text_muted u-display-inline-block u-vertical-align-top">{{par.device.param.measure.unit}}</span>
-                                                    </div>
-                                                    <div *ngIf="par.data?.value === null"
-                                                         class="u-text-truncate u-text_center u-display-inline-block">
+                            <span
+                              class="u-text_muted u-display-inline-block u-vertical-align-top">{{par.device.param.measure.unit}}</span>
+                          </div>
+                          <div *ngIf="par.data?.value === null"
+                               class="u-text-truncate u-text_center u-display-inline-block">
                   <span class="c-text_widget-value-small u-vertical-align-middle"
                         title="No data for period"
                   >
                     {{'No data for the period' | translate}}
                   </span>
-                                                    </div>
+                          </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="o-grid">
-                                            <div class="o-grid__cell o-grid__cell_width-fixed u-centring-ver"
-                                                 style="width: 80px">
-                                            </div>
-                                            <div class="o-grid__cell o-grid__cell_width-80">
-                                                <div class="u-display-inline-block u-margin-right-small text-muted u-h6">{{'Min.' | translate
-                                                    }}: {{par.data?.min}}
-                                                </div>
-                                                <div class="u-display-inline-block text-muted u-h6">{{'Max.' | translate}}
-                                                    :
-                                                    {{par.data?.max}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="u-margin-left-small">
-                                        <div *ngIf="par.borders.length"
-                                             [container]="'body'"
-                                             [ngbTooltip]="statusRangesTemplate"
-                                             class="c-icon c-icon_svg c-icon_svg-middle">
-                                            <svg height="24"
-                                                 viewBox="0 0 24 24" width="24"
-                                                 xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <defs>
-                                                    <path
-                                                            d="M3,5 L3,6 L4,6 L4,5 L3,5 Z M5,5 L5,6 L7,6 L7,5 L5,5 Z M8,5 L8,6 L10,6 L10,5 L8,5 Z M9,5 L9,6 L11,6 L11,5 L9,5 Z M12,5 L12,6 L14,6 L14,5 L12,5 Z M13,5 L13,6 L15,6 L15,5 L13,5 Z M16,5 L16,6 L18,6 L18,5 L16,5 Z M17,5 L17,6 L19,6 L19,5 L17,5 Z M20,5 L20,6 L21,6 L21,5 L20,5 Z M18.2420263,7 C16.6196061,7 16.0370543,8.733073 15.4727955,10.40625 C15.2265478,11.138021 14.9929644,11.7864583 14.7298311,12.3333333 L8.96622889,12.3333333 C9.00140704,12.5078127 9.04502814,12.7369793 9.10131332,13 L14.3470919,13 C13.9249531,13.6289063 13.414165,14 12.6923077,14 C11.2429645,14 10.7265479,15.1132813 10.3846154,15.8541667 C10.1271106,16.4127603 9.98217654,16.6666667 9.81050657,16.6666667 C9.11819887,16.6666667 8.55112561,13.8815103 8.24577861,12.3854167 C7.69277683,9.67447933 7.21153837,7.33333333 5.48780488,7.33333333 C3.79502805,7.33333333 3.0956848,9.578125 3.02251407,9.83333333 L4.41838649,10.1666667 C4.59427758,9.55338533 5.10084419,8.66666667 5.48780488,8.66666667 C5.98030037,8.66666667 6.50797364,11.1119793 6.75984991,12.3333333 L3,12.3333333 L3,13 L6.90619137,13 C7.44512204,15.6184897 8.00797382,18 9.81050657,18 C10.9629457,18 11.3864916,17.0677083 11.7016886,16.3854167 C12.0703567,15.5846353 12.2631333,15.3333333 12.6923077,15.3333333 C15.3180114,15.3333333 16.1651032,12.8216147 16.8461538,10.8020833 C17.2359286,9.64583333 17.6791745,8.33333333 18.2420263,8.33333333 C19.2030958,8.33333333 19.5787994,10.0963543 19.5816135,10.1145833 L21,9.88541667 C20.8015948,8.8125 20.0009383,7 18.2420263,7 Z M17.265252,13 C17.1816975,13.3359375 17.0968169,13.667969 17,14 L21,14 L21,13 L17.265252,13 Z M3,19 L3,20 L4,20 L4,19 L3,19 Z M5,19 L5,20 L7,20 L7,19 L5,19 Z M8,19 L8,20 L10,20 L10,19 L8,19 Z M9,19 L9,20 L11,20 L11,19 L9,19 Z M12,19 L12,20 L14,20 L14,19 L12,19 Z M13,19 L13,20 L15,20 L15,19 L13,19 Z M16,19 L16,20 L18,20 L18,19 L16,19 Z M17,19 L17,20 L19,20 L19,19 L17,19 Z M20,19 L20,20 L21,20 L21,19 L20,19 Z"
-                                                            id="electricwire-a"/>
-                                                </defs>
-                                                <use xlink:href="#electricwire-a"/>
-                                            </svg>
-                                        </div>
-                                        <ng-template #statusRangesTemplate>
-                                            <p>{{'Parameter borders' | translate}}</p>
-                                            <p *ngFor="let border of par.borders"
-                                               class="u-text_center c-widget__block_status-{{border.state.color}} u-margin-bottom-tiny">
-                                                {{border.intervals[0].from}} .. {{border.intervals[0].to}}</p>
-                                        </ng-template>
-                                        <a [href]="par.device?.param?.id | makeChartUrl:par.device?.param?.calc"
-                                           class="u-display-inline-block c-icon c-icon_svg c-icon_svg-middle"
-                                           placement="right">
-                                            <svg height="24"
-                                                 viewBox="0 0 24 24" width="24"
-                                                 xmlns="http://www.w3.org/2000/svg"
-                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <defs>
-                                                    <path
-                                                            d="M9,17 L7,17 L7,10 L9,10 L9,17 Z M13,17 L11,17 L11,7 L13,7 L13,17 Z M17,17 L15,17 L15,13 L17,13 L17,17 Z"
-                                                            id="chart_bar_no_fill-a"/>
-                                                </defs>
-                                                <use xlink:href="#chart_bar_no_fill-a"/>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- end -->
-                            </ng-container>
                         </div>
+                      </div>
                     </div>
+                    <div class="o-grid">
+                      <div class="o-grid__cell o-grid__cell_width-fixed u-centring-ver" style="width: 80px">
+                      </div>
+                      <div class="o-grid__cell o-grid__cell_width-80">
+                        <div class="u-display-inline-block u-margin-right-small text-muted u-h6">{{'Min.' | translate
+                          }}: {{par.data?.min}}
+                        </div>
+                        <div class="u-display-inline-block text-muted u-h6">{{'Max.' | translate}}:
+                          {{par.data?.max}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="u-margin-left-small">
+                    <div *ngIf="par.borders.length"
+                         [container]="'body'"
+                         [ngbTooltip]="statusRangesTemplate"
+                         class="c-icon c-icon_svg c-icon_svg-middle">
+                      <svg height="24"
+                           viewBox="0 0 24 24" width="24"
+                           xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                          <path
+                            d="M3,5 L3,6 L4,6 L4,5 L3,5 Z M5,5 L5,6 L7,6 L7,5 L5,5 Z M8,5 L8,6 L10,6 L10,5 L8,5 Z M9,5 L9,6 L11,6 L11,5 L9,5 Z M12,5 L12,6 L14,6 L14,5 L12,5 Z M13,5 L13,6 L15,6 L15,5 L13,5 Z M16,5 L16,6 L18,6 L18,5 L16,5 Z M17,5 L17,6 L19,6 L19,5 L17,5 Z M20,5 L20,6 L21,6 L21,5 L20,5 Z M18.2420263,7 C16.6196061,7 16.0370543,8.733073 15.4727955,10.40625 C15.2265478,11.138021 14.9929644,11.7864583 14.7298311,12.3333333 L8.96622889,12.3333333 C9.00140704,12.5078127 9.04502814,12.7369793 9.10131332,13 L14.3470919,13 C13.9249531,13.6289063 13.414165,14 12.6923077,14 C11.2429645,14 10.7265479,15.1132813 10.3846154,15.8541667 C10.1271106,16.4127603 9.98217654,16.6666667 9.81050657,16.6666667 C9.11819887,16.6666667 8.55112561,13.8815103 8.24577861,12.3854167 C7.69277683,9.67447933 7.21153837,7.33333333 5.48780488,7.33333333 C3.79502805,7.33333333 3.0956848,9.578125 3.02251407,9.83333333 L4.41838649,10.1666667 C4.59427758,9.55338533 5.10084419,8.66666667 5.48780488,8.66666667 C5.98030037,8.66666667 6.50797364,11.1119793 6.75984991,12.3333333 L3,12.3333333 L3,13 L6.90619137,13 C7.44512204,15.6184897 8.00797382,18 9.81050657,18 C10.9629457,18 11.3864916,17.0677083 11.7016886,16.3854167 C12.0703567,15.5846353 12.2631333,15.3333333 12.6923077,15.3333333 C15.3180114,15.3333333 16.1651032,12.8216147 16.8461538,10.8020833 C17.2359286,9.64583333 17.6791745,8.33333333 18.2420263,8.33333333 C19.2030958,8.33333333 19.5787994,10.0963543 19.5816135,10.1145833 L21,9.88541667 C20.8015948,8.8125 20.0009383,7 18.2420263,7 Z M17.265252,13 C17.1816975,13.3359375 17.0968169,13.667969 17,14 L21,14 L21,13 L17.265252,13 Z M3,19 L3,20 L4,20 L4,19 L3,19 Z M5,19 L5,20 L7,20 L7,19 L5,19 Z M8,19 L8,20 L10,20 L10,19 L8,19 Z M9,19 L9,20 L11,20 L11,19 L9,19 Z M12,19 L12,20 L14,20 L14,19 L12,19 Z M13,19 L13,20 L15,20 L15,19 L13,19 Z M16,19 L16,20 L18,20 L18,19 L16,19 Z M17,19 L17,20 L19,20 L19,19 L17,19 Z M20,19 L20,20 L21,20 L21,19 L20,19 Z"
+                            id="electricwire-a"/>
+                        </defs>
+                        <use xlink:href="#electricwire-a"/>
+                      </svg>
+                    </div>
+                    <ng-template #statusRangesTemplate>
+                      <p>{{'Parameter borders' | translate}}</p>
+                      <p *ngFor="let border of par.borders"
+                         class="u-text_center c-widget__block_status-{{border.state.color}} u-margin-bottom-tiny">
+                        <span *ngIf="border.intervals">{{border.intervals[0].from}} .. {{border.intervals[0].to}}</span></p>
+                    </ng-template>
+                    <a [href]="par.device?.param?.id | makeChartUrl:par.device?.param?.calc"
+                       class="u-display-inline-block c-icon c-icon_svg c-icon_svg-middle"
+                       placement="right">
+                      <svg height="24"
+                           viewBox="0 0 24 24" width="24"
+                           xmlns="http://www.w3.org/2000/svg"
+                           xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                          <path
+                            d="M9,17 L7,17 L7,10 L9,10 L9,17 Z M13,17 L11,17 L11,7 L13,7 L13,17 Z M17,17 L15,17 L15,13 L17,13 L17,17 Z"
+                            id="chart_bar_no_fill-a"/>
+                        </defs>
+                        <use xlink:href="#chart_bar_no_fill-a"/>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
+
+                <!-- end -->
+              </ng-container>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
 </div>

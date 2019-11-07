@@ -21,7 +21,7 @@ const REQUEST_PARAMS: WidgetParams = {
     title: '',
     item_type: ITEM_TYPE.interval,
     items: [{
-      max: 8,
+      max: 20,
     }]
   }
 };
@@ -31,6 +31,14 @@ class WidgetPieIntervalComponent extends WidgetComponent {
   configs: any;
   data: any;
   intervalDates: any;
+  height = 300;
+  width = 300;
+
+  onResize(width, height) {
+    this.height = height - 50;
+    this.width = width;
+  }
+
 
   onUpdate(values) {
     if (values.charts && values.charts.items && values.charts.items.length > 0) {
@@ -53,20 +61,7 @@ class WidgetPieIntervalComponent extends WidgetComponent {
   }
 
   private prepareDataPie(items, charts) {
-    const pieDataKeys = items
-      .map(_item => _item.title)
-      .filter((value, index, self) => self.indexOf(value) === index);
-
-    const avg = (data, itemTitle) => {
-      if (data.items.length === 0) {
-        return 0;
-      }
-
-      const points = data.items.filter(_item => _item.title === itemTitle);
-      return points.reduce((_prev, _point) => _point.value + _prev, 0) / points.length;
-    };
-
-    const pieData = pieDataKeys.map(_itemTitle => ({'key': _itemTitle, 'value': avg(charts, _itemTitle)}));
+    const pieData = charts.items.map(_item => ({'key': _item.title, 'value': _item.value}));
     this.data = {value: '', data: pieData};
     this.configs = {charttype: ChartTypes.pieChart};
   }

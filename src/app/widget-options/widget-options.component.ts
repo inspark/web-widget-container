@@ -133,6 +133,7 @@ export class WidgetOptionsComponent implements OnInit {
   generate() {
     this.values = generateValues(this.params, this.config);
     this.values = this.addChartData(this.values);
+    console.log({command: 'values', config: this.generateConfig, values: this.values, widget: this.selectedWidget});
     this.communication.next(0, {command: 'values', config: this.generateConfig, values: this.values, widget: this.selectedWidget});
   }
 

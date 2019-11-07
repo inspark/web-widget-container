@@ -7,10 +7,10 @@ if [ -z "$1" ]
 fi
 
 sh locale.sh $NAME
-rm ./dist/*/* -rf
-rm  -r ./build
+rm -rf ./dist/*/*
+#rm -rf ./build
 node ./node_modules/webpack-cli/bin/cli.js --config config/webpack.prod.js --progress --profile --bailnpm  --env.WIDGET_NAME=$NAME
 mkdir build
 pushd dist
-zip -q -r  ../build/release.zip ./*
+zip -q -r  ../build/$NAME.zip ./*
 popd

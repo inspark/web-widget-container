@@ -2,15 +2,15 @@
     <ng-container>
 
         <div class="controls">
-        <div>
-            Current size: <input value="{{position | json}}" [readOnly]="true"/>
-        </div>
+            <div>
+                Current size: <input value="{{position | json}}" [readOnly]="true"/>
+            </div>
 
-        <p-selectButton styleClass="button" [options]="langs" [(ngModel)]="currentLang"
-                        (onChange)="changeLang()"></p-selectButton>
+            <p-selectButton styleClass="button" [options]="langs" [(ngModel)]="currentLang"
+                            (onChange)="changeLang()"></p-selectButton>
 
-        <p-selectButton styleClass="button" [options]="sizes" [(ngModel)]="viewMode"
-                        (onChange)="changeSize()"></p-selectButton>
+            <p-selectButton styleClass="button" [options]="sizes" [(ngModel)]="viewMode"
+                            (onChange)="changeSize()"></p-selectButton>
 
             <p-selectButton styleClass="button" [options]="themes" [(ngModel)]="currentTheme"
                             (onChange)="changeTheme()"></p-selectButton>
@@ -32,12 +32,11 @@
                         [(wSm)]="position.sm.w" [(hSm)]="position.sm.h"
                         [(wLg)]="position.lg.w" [(hLg)]="position.lg.h"
                         [dragAndDrop]="true"
-                        (reflow)="onReflow()"
-                        (change)="itemChange($event)"
+                        (change)="itemChange(widget, $event)"
                 >
                     <div class="c-panel c-panel_lighter c-panel_widget-block widget-block">
                         <div class="widget-container" *ngIf="widget">
-                            <app-widget-container [widget]="widget" [params]="params"></app-widget-container>
+                            <app-widget-container [widget]="widget" [params]="params" (ready)="onReady()"></app-widget-container>
                         </div>
                     </div>
                 </ngx-gridster-item>

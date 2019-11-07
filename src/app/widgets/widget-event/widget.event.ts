@@ -28,7 +28,7 @@ class WidgetEventComponent extends WidgetComponent {
 
   onUpdate(values: EventParameters) {
 
-    if (values.events) {
+    if (values.events && values.events.data) {
       values.events.data.rowList = values.events.data.rowList.map((event: any) => {
         values.events.config.attrList.forEach(attrname => {
 

@@ -11,7 +11,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {WidgetOptionsComponent} from './widget-options/widget-options.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NvD3Module} from 'angular2-nvd3';
+import {NvD3Module} from 'ng2-nvd3';
 import {DashboardPanelComponent} from './panel/dashboard-panel.component';
 import {ControlsComponent} from './panel/controls/controls.component';
 import {ComponentsModule} from './components.module';
@@ -55,9 +55,6 @@ import {CommonModule} from '@angular/common';
 })
 export class AppModule {
 }
-
-
-platformBrowserDynamic().bootstrapModule(AppModule);
 
 
 export function HttpLoaderFactory(http: HttpClient) {

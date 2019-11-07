@@ -1,88 +1,91 @@
-<div class="c-panel__body"
+<div class="image" *ngIf="pictureId"
      [ngStyle]="{'background-image': 'url(' + (pictureId | makePictureUrl) + ')'}"
      [ngClass]="{'c-panel__body_background-image' : pictureId}">
-  <div class="c-table_responsive">
+</div>
+<div class="c-table_responsive">
     <table
-      class="c-table c-table_striped c-table_condensed c-table_bordered c-table_th-min-width-huge c-table_td-min-width-huge">
-      <thead>
-      <tr *ngIf="values.item.viewConfig.visibleCol">
-        <th *ngIf="values.item.viewConfig.visibleRow"></th>
-        <th *ngFor="let row of values.item.viewConfig.cols | arrayNumber; let idx = index" class="u-text_center">
-          {{values.item.viewConfig.colsName[idx]}}
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let row of values.item.viewConfig.rows | arrayNumber; let idx = index">
-        <td *ngIf="values.item.viewConfig.visibleRow" class="u-vertical-align-middle u-text_center">
-          <span *ngIf="values.item.viewConfig.rowsName[idx]">{{values.item.viewConfig.rowsName[idx]}}</span>
-        </td>
-        <ng-container *ngIf="!values.item.values[idx]">
-          <td></td>
-        </ng-container>
-        <ng-container *ngIf="values.item.values[idx]">
-          <td *ngFor="let col of values.item.viewConfig.cols | arrayNumber; let jdx = index"
-              [ngClass]="values.item.values[idx][jdx] && values.item.values[idx][jdx].data && values.item.values[idx][jdx].data.state? 'c-widget__block_status-' + values.item.values[idx][jdx].data.state?.color: ''"
-              class="">
-            <div class="o-grid o-grid_wrap o-grid_no-gutter">
-              <div class="o-grid__cell o-grid__cell_width-100">
-                <div *ngIf="values.item.values[idx][jdx] && values.item.values[idx][jdx].device"
-                     class="o-grid o-grid_no-gutter">
-                  <div class="o-grid__cell u-text_center u-centring-ver" style="width: 30px">
-                    <div *ngIf="getIconUrl(values.item.values[idx][jdx])"
-                         [inlineSVG]="getIconUrl(values.item.values[idx][jdx])"
-                         class="c-icon c-icon_svg c-icon_svg-large u-text_center"></div>
-                  </div>
+            class="c-table c-table_striped c-table_condensed c-table_bordered c-table_th-min-width-huge c-table_td-min-width-huge">
+        <thead>
+        <tr *ngIf="values.item.viewConfig.visibleCol">
+            <th *ngIf="values.item.viewConfig.visibleRow"></th>
+            <th *ngFor="let row of values.item.viewConfig.cols | arrayNumber; let idx = index" class="u-text_center">
+                {{values.item.viewConfig.colsName[idx]}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of values.item.viewConfig.rows | arrayNumber; let idx = index">
+            <td *ngIf="values.item.viewConfig.visibleRow" class="u-vertical-align-middle u-text_center">
+                <span *ngIf="values.item.viewConfig.rowsName[idx]">{{values.item.viewConfig.rowsName[idx]}}</span>
+            </td>
+            <ng-container *ngIf="!values.item.values[idx]">
+                <td></td>
+            </ng-container>
+            <ng-container *ngIf="values.item.values[idx]">
+                <td *ngFor="let col of values.item.viewConfig.cols | arrayNumber; let jdx = index"
+                    [ngClass]="values.item.values[idx][jdx] && values.item.values[idx][jdx].data && values.item.values[idx][jdx].data.state? 'c-widget__block_status-' + values.item.values[idx][jdx].data.state?.color: ''"
+                    class="">
+                    <a [href]="values.item.values[idx][jdx] && values.item.values[idx][jdx].dashboardLink? '#!/main/dashboard/' + values.item.values[idx][jdx].dashboardLink.id :'#'"
+                       class="o-grid o-grid_wrap o-grid_no-gutter link-to-dashboard"
+                       [ngClass]="{nonClickable: !values.item.values[idx][jdx] || !values.item.values[idx][jdx].dashboardLink}">
+                        <div class="o-grid__cell o-grid__cell_width-100">
+                            <div *ngIf="values.item.values[idx][jdx] && values.item.values[idx][jdx].device"
+                                 class="o-grid o-grid_no-gutter">
+                                <div class="o-grid__cell u-text_center u-centring-ver" style="width: 30px">
+                                    <div *ngIf="getIconUrl(values.item.values[idx][jdx])"
+                                         [inlineSVG]="getIconUrl(values.item.values[idx][jdx])"
+                                         class="c-icon c-icon_svg c-icon_svg-large u-text_center"></div>
+                                </div>
 
-                  <div *ngIf="values.item.values[idx][jdx].viewConfig.view !== 'icon'"
-                       class="o-grid__cell o-grid__cell_width-80 c-widget__block">
-                    <div *ngIf="!values.item.values[idx][jdx].isEditing"
-                         class="c-widgetValue c-widgetValue_small">
-                      <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle">
+                                <div *ngIf="values.item.values[idx][jdx].viewConfig.view !== 'icon'"
+                                     class="o-grid__cell o-grid__cell_width-80 c-widget__block">
+                                    <div *ngIf="!values.item.values[idx][jdx].isEditing"
+                                         class="c-widgetValue c-widgetValue_small">
+                                        <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle">
                                             <span class="c-text_widget-value-small"
                                                   title="{{values.item.values[idx][jdx].value}} {{values.item.values[idx][jdx].device.param.measure.title}}">
                                                   {{values.item.values[idx][jdx].value}}
                                             </span>
-                      </div>
-                      <!--<span *ngIf="!par.isFormated" class="u-text_muted u-display-inline-block u-vertical-align-top u-vertical-align-middle">{{par.data.value}} {{par.measure.unit}}</span>-->
-                      <!--<div class="u-text_base" *ngIf="par.data.state.color == 'falsevalue'">-->
-                      <!--Значение не достоверно-->
-                      <!--</div>-->
-                      <div *ngIf="values.item.values[idx][jdx].data && values.item.values[idx][jdx].canEditable"
-                           class="u-display-inline-flex">
-                        <button (click)="paramEdit(values.item.values[idx][jdx])"
-                                class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
-                          <i class="fa fa-pencil"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div *ngIf="values.item.values[idx][jdx].isEditing"
-                         class="c-widgetValue c-widgetValue_small">
-                      <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle "
-                           style="position: relative;">
-                        <input [(ngModel)]="values.item.values[idx][jdx].value" class="c-input c-input_tiny c-input_block"
-                               onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
-                               required type="text">
-                        <div class="u-display-inline-flex">
-                          <button (click)="paramCancel(values.item.values[idx][jdx])"
-                                  class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
-                            <i class="fa fa-close"></i>
-                          </button>
-                          <button (click)="paramSave(values.item.values[idx][jdx])"
-                                  class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary">
-                            <i class="fa fa-check"></i>
-                          </button>
+                                        </div>
+                                        <!--<span *ngIf="!par.isFormated" class="u-text_muted u-display-inline-block u-vertical-align-top u-vertical-align-middle">{{par.data.value}} {{par.measure.unit}}</span>-->
+                                        <!--<div class="u-text_base" *ngIf="par.data.state.color == 'falsevalue'">-->
+                                        <!--Значение не достоверно-->
+                                        <!--</div>-->
+                                        <div *ngIf="values.item.values[idx][jdx].data && values.item.values[idx][jdx].canEditable"
+                                             class="u-display-inline-flex">
+                                            <button (click)="paramEdit(values.item.values[idx][jdx])"
+                                                    class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="values.item.values[idx][jdx].isEditing"
+                                         class="c-widgetValue c-widgetValue_small">
+                                        <div class="u-text-truncate u-text_center u-display-inline-block u-vertical-align-middle "
+                                             style="position: relative;">
+                                            <input [(ngModel)]="values.item.values[idx][jdx].value"
+                                                   class="c-input c-input_tiny c-input_block"
+                                                   onkeypress='return event.charCode === 43 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)'
+                                                   required type="text">
+                                            <div class="u-display-inline-flex">
+                                                <button (click)="paramCancel(values.item.values[idx][jdx])"
+                                                        class="c-btn c-btn_bare c-btn_border-free c-btn_tiny">
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                                <button (click)="paramSave(values.item.values[idx][jdx])"
+                                                        class="c-btn c-btn_bare c-btn_border-free c-btn_tiny c-btn_primary">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </ng-container>
-      </tr>
-      </tbody>
+                    </a>
+                </td>
+            </ng-container>
+        </tr>
+        </tbody>
     </table>
-  </div>
 </div>

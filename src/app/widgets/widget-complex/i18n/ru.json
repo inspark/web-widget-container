@@ -5,9 +5,8 @@
 	"Min": {
 		"0": ""
 	},
-	"No data for the period": "Нет данных за период",
-	"Off": "Выключен",
-	"On": "Включен",
-	"Parameter borders": "Границы параметра",
-	"manually": "ручное переключение"
+	"No data for the period": "",
+	"Off": "",
+	"On": "",
+	"Parameter borders": ""
 }

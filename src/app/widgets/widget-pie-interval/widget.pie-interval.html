@@ -7,6 +7,8 @@
 </div>
 <div class="o-flex o-grid__cell_width-100 o-grid_center">
     <app-pie-chart class="chart"
+                   [width]="component.width"
+                   [height]="component.height"
                    [noDataMessage]="'noData' | translate"
                    [values]="component.data"
                    [config]="component.configs"

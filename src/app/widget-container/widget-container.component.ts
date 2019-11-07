@@ -1,9 +1,9 @@
 import {
   Compiler,
-  Component,
+  Component, EventEmitter,
   Input,
   NgModuleFactory, OnChanges,
-  OnInit, SimpleChange,
+  OnInit, Output, SimpleChange,
 } from '@angular/core';
 import {
   WidgetPackage,
@@ -11,7 +11,7 @@ import {
   WidgetParams,
   CommunicationService,
   WidgetContainer,
-  WidgetContainerDevOptions
+  WidgetContainerDevOptions, ItemSingle
 } from '@inspark/widget-common';
 
 
@@ -31,23 +31,32 @@ export class WidgetContainerComponent extends WidgetContainer implements OnInit,
   @Input() params: WidgetParams;
   @Input() widget: WidgetPackage;
 
+  @Output() ready = new EventEmitter();
+
   constructor(private compiler: Compiler, private communication: CommunicationService) {
     super();
     this.communication.create(0);
   }
 
   ngOnChanges(changes: { [k: string]: SimpleChange }) {
-    console.log('changes', changes.widget);
     if (changes.widget.currentValue !== changes.widget.previousValue) {
       this.loadWidget();
     }
   }
 
+  setManual(param: ItemSingle, value: boolean) {
+    param.data.manually = value;
+  }
+
   loadWidget() {
-    console.log('loadWidget', this.widget);
     try {
-      this.dynamicComponent = this.createNewComponent({widgetPackage: this.widget, isDev: true} as WidgetContainerDevOptions);
+      this.dynamicComponent = this.createNewComponent({
+        widgetPackage: this.widget,
+        isDev: true,
+        setManual: this.setManual.bind(this)
+      } as WidgetContainerDevOptions);
       this.dynamicModule = this.compiler.compileModuleSync(this.createComponentModule(this.dynamicComponent));
+      this.ready.emit();
     } catch (e) {
       console.error('ERROR COMPONENT CREATE', e);
     }

@@ -6,8 +6,9 @@ import {
   WidgetPackage,
   WidgetComponent,
   WidgetComponentContainer,
-  Component
+  Component, ChartTypes
 } from '@inspark/widget-common/interface';
+import {ElementRef, ViewChild} from '@angular/core';
 
 interface ChartInputParameters {
   charts: {
@@ -32,8 +33,29 @@ class WidgetChartComponent extends WidgetComponent {
 
   config: ParamConfigSeries;
   data: any[] = [];
+  height = 300;
+
+  realHeight = 300;
+  width = 300;
+
+  onResize(width, height) {
+    this.realHeight = height;
+    if (this.config) {
+      this.updateHeight();
+    }
+    this.width = width;
+  }
+
+  updateHeight() {
+    if (this.config && (this.config.charttype === ChartTypes.histogramChart || this.config.charttype === ChartTypes.candlestickBarChart)) {
+      this.height = this.realHeight - 60;
+    } else {
+      this.height = this.realHeight - 40;
+    }
+  }
 
   onUpdate(values: ChartInputParameters) {
+
     this.data = [];
     if (values.charts) {
       this.config = values.charts.config;
@@ -41,6 +63,7 @@ class WidgetChartComponent extends WidgetComponent {
         this.data[ind] = val;
       });
     }
+    this.updateHeight();
   }
 
 }

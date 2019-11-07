@@ -1,16 +1,14 @@
 {
-  "Switch state": "Switch state",
-  "Title": "Title",
-  "Object name": "Object name",
-  "Zone": "Zone",
-  "Control mode": "Control mode",
-  "Last switching": "Last switching",
-  "Manual mode": "Manual mode",
-  "Off": "Off",
-  "On": "On",
-  "Manually": "Manually",
-  "Scheduled": "Scheduled",
-  "Not allowed": "Not allowed",
-  "Locked": "Locked",
-  "Not worked": "Not worked"
+	"Control mode": "Control mode",
+	"Controller is not available": "Controller is not available",
+	"Last switching": "Last switching",
+	"Locked": "Locked",
+	"Manual mode": "Manual mode",
+	"Not allowed": "Not allowed",
+	"Not worked": "Not worked",
+	"Off": "Off",
+	"On": "On",
+	"Switch state": "Switch state",
+	"Title": "Title",
+	"Список сигнальных значений": ""
 }
