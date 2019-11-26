@@ -6,6 +6,7 @@ import WidgetTable from './widgets/widget-table/widget.table';
 import WidgetComplex from './widgets/widget-complex/widget.complex';
 import WidgetText from './widgets/widget-text/widget.text';
 import WidgetInfo from './widgets/widget-info-board/widget.info-board';
+import WidgetIntegralStatuses from './widgets/widget-integral-statuses/widget.integral-statuses';
 import {WidgetPackage} from '@inspark/widget-common';
 
 
@@ -38,5 +39,6 @@ export const widgetLibrary = new WidgetLibrary([
   {name: 'WidgetComplex', package: WidgetComplex},
   {name: 'WidgetText', package: WidgetText},
   {name: 'WidgetInfo', package: WidgetInfo},
+  {name: 'WidgetIntegralStatuses', package: WidgetIntegralStatuses},
 ] as LibraryWidget[]);
 

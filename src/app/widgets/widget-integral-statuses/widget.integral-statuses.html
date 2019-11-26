@@ -1,0 +1,25 @@
+<div class="c-panel__body ">
+  <div class="o-grid o-grid_wrap">
+    {{component.groupWorstestState}}
+    <div *ngIf="values.group1.items.length > 0"
+         [ngClass]="'c-widget__block_status-' + component.groupWorstestState"
+         class="o-grid__cell o-grid__cell_width-100 c-widget__block c-widget__block_status-">
+      <i class="fa fa-address-book"></i>
+    </div>
+    <div *ngIf="values.group2.items.length > 0"
+         [ngClass]="'c-widget__block_status-' + component.groupWorstestState"
+         class="o-grid__cell o-grid__cell_width-100 c-widget__block c-widget__block_status-">
+      <i class="fa fa-address-book"></i>
+    </div>
+    {{component.evilResponseProps}}
+    <div *ngFor="let group of component.evilResponseProps; let i = index"
+         [ngClass]="'c-widget__block_status-' + component.groupWorstestState(values, group)"
+         class="o-grid__cell o-grid__cell_width-100 c-widget__block c-widget__block_status-">
+      <div *ngIf="true">
+        {{i}} - {{group}}
+        <i class="fa fa-address-book"></i>
+      </div>
+    </div>
+
+  </div>
+</div>
