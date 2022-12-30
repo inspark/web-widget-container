@@ -34,7 +34,7 @@
     "@angular/cli": "~7.0.4",
     "@angular/compiler-cli": "~7.0.0",
     "@angular/language-service": "~7.0.0",
-    "@biesbjerg/ngx-translate-extract": "^2.3.4",
+    "@biesbjerg/ngx-translate-extract": "^7.0.4",
     "@blare/angular2gridster": "^7.0.6",
     "@inspark/components-web": "^0.1.27",
     "@inspark/widget-common": "0.1.21",
